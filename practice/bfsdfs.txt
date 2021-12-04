@@ -1,0 +1,125 @@
+import java.util.*;
+
+class Graph {
+      
+    static boolean visited[];
+  
+    static void addEdge(ArrayList<ArrayList<Integer> > adj,
+                        int u, int v)
+    {
+        adj.get(u).add(v);
+        adj.get(v).add(u);
+    }
+  
+  /*
+  
+  static void dfs(ArrayList<ArrayList<Integer> > adj,int start){
+      
+       visited[start]=true;
+       System.out.println(start+" ");
+        for(int i=0;i<adj.get(start).size();i++){
+                if(!visited[adj.get(start).get(i)]){
+                    dfs(adj,adj.get(start).get(i));
+                }
+        }
+      
+  }*/
+  
+ 
+  
+  static void dfs(ArrayList<ArrayList<Integer> > adj,int start){
+      
+       Stack<Integer> st=new Stack<Integer>();
+       st.push(start);
+       
+       
+       while(!st.isEmpty()){
+           
+           int curr=st.pop();
+         
+           if(!visited[curr])
+           {
+                 System.out.println(curr);
+                 visited[curr]=true;
+           }
+           
+           for(int i=0;i<adj.get(curr).size();i++){
+                if(!visited[adj.get(curr).get(i)])
+                    st.push(adj.get(curr).get(i));
+                
+            }
+           
+       }
+      
+  }
+  
+ 
+    static void BFS(ArrayList<ArrayList<Integer> > adj,int start){
+    
+        Queue<Integer> queue=new LinkedList<>();
+        queue.add(start);
+        visited[start]=true;
+        
+        while(!queue.isEmpty()){
+            
+            int curr=queue.remove();
+            
+            System.out.println(curr);
+            
+            for(int i=0;i<adj.get(curr).size();i++){
+                if(!visited[adj.get(curr).get(i)]){
+                    queue.add(adj.get(curr).get(i));
+                    visited[adj.get(curr).get(i)]=true;
+                }
+            }
+        
+        }
+        
+    } 
+  
+  static void BFSTraversal(ArrayList<ArrayList<Integer> > adj){
+       visited=new boolean[adj.size()];
+       
+       for(int i=0;i<adj.size();i++){
+           if(!visited[i]){
+               dfs(adj,i);
+           }
+       }
+       
+  }
+
+    static void printGraph(ArrayList<ArrayList<Integer> > adj)
+    {
+        for (int i = 0; i < adj.size(); i++) {
+            System.out.println("\nAdjacency list of vertex" + i);
+            System.out.print("head");
+            for (int j = 0; j < adj.get(i).size(); j++) {
+                System.out.print(" -> "+adj.get(i).get(j));
+            }
+            System.out.println();
+        }
+    }
+  
+   
+    public static void main(String[] args)
+    {
+        
+        int V = 5;
+        ArrayList<ArrayList<Integer> > adj 
+                    = new ArrayList<ArrayList<Integer> >(V);
+          
+        for (int i = 0; i < V; i++)
+            adj.add(new ArrayList<Integer>());
+  
+        
+        addEdge(adj, 0, 1);
+        addEdge(adj, 0, 4);
+        addEdge(adj, 1, 2);
+        addEdge(adj, 1, 3);
+        addEdge(adj, 1, 4);
+        addEdge(adj, 2, 3);
+        addEdge(adj, 3, 4);
+          BFSTraversal(adj);
+        //printGraph(adj);
+    }
+}
