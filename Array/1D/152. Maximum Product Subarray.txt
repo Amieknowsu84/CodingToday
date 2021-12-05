@@ -1,0 +1,46 @@
+class Solution {
+    public int maxProduct(int[] nums) {
+        
+        int max=Integer.MIN_VALUE,prod=1;
+        //intuition behind this is for proof try fallacy 4 cases if ans is in between
+        // +ve(ans)+ve then ans = left*ans*right (entire array)
+        // +ve(ans)-ve then ans = left*ans  (starting from left)
+        // -ve(ans)+ve ans = ans*right      (starting from right)
+        // -ve(ans)-ve ans = left*ans*right  (entire array)
+        
+        //either the maximum sum subarray from starting i.e (0-0),(0-1),(0-2).and so on
+        
+        //also if prod is zero i.e while iterating from start or end we found zero in between we will make it zero and          start considering from current element
+        
+        for(int i=0;i<nums.length;i++){
+           
+            prod*=nums[i];
+            if(prod>max)
+                max=prod;
+            
+            if(prod==0){
+                prod=1;
+            }
+        }
+        
+         prod=1;
+         //or the maximum sum subarray from end i.e (5-5),(5-4)...and so on
+        
+        //also if prod is zero i.e while iterating from start or end we found zero in between we will make it zero and          start considering from current element
+       
+         for(int i=nums.length-1;i>=0;i--){
+           
+            prod*=nums[i];
+            if(prod>max)
+                max=prod;
+            if(prod==0)
+                prod=1;
+            
+        }
+        
+        
+        
+        return max;
+        
+    }
+}
