@@ -1,0 +1,37 @@
+/*
+ 878. Nth Magical Number
+*/
+
+class Solution {
+    
+    int hcf(int a,int b){
+        if (b == 0)
+           return a;
+      return hcf(b, a % b);        
+    }
+    
+    public int nthMagicalNumber(int n, int a, int b) {
+        
+        long range=(long)Math.pow(10,9)+7;
+        long left=Math.min(a,b);
+        long right=(long)n*Math.min(a,b);
+        long mid=0,calc=0;
+        
+        int lcm=(a*b)/hcf(a,b);
+        
+        while(left<right){
+            
+            mid=left+(right-left)/2;
+            calc=mid/a+mid/b-mid/lcm;
+            if(calc<n)
+                left=mid+1;
+            else
+                right=mid;
+            
+        }
+        
+        
+        return (int)(left%range);
+        
+    }
+}
