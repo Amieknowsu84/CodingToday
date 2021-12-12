@@ -1,0 +1,41 @@
+class Solution {
+   
+   int dp[][];
+    
+   int findSum(int arr[],int index,int toFind){
+    
+      if(toFind==0)
+          return 1;    
+      
+      if(index<0||toFind<0)
+          return 0;
+       
+       if(dp[index][toFind]!=-1)
+           return dp[index][toFind];
+      
+      return dp[index][toFind]=
+            (findSum(arr,index-1,toFind)==1)?1:findSum(arr,index-1,toFind-arr[index]) ;
+      
+    }
+
+    public boolean canPartition(int[] arr) {
+         
+         int sum=0;
+        
+        for(int i:arr)
+           sum+=i;
+        if(sum%2!=0)
+          return false;
+         else{
+             int toFind=(sum/2);
+             int lastElementIndex=arr.length-1;
+             dp = new int[arr.length+1][toFind+1]; 
+             
+             for(int a[]:dp)
+                 Arrays.fill(a,-1);
+             
+             int res=findSum(arr,lastElementIndex,toFind);   
+             return res==1?true:false;
+         }
+      }
+}

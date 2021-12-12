@@ -1,0 +1,32 @@
+class Solution {
+   
+   boolean findSum(int arr[],int index,int toFind){
+    
+      if(toFind==0)
+          return true;    
+      
+      if(index<0||toFind<0)
+          return false;
+      
+      return  findSum(arr,index-1,toFind)
+                || findSum(arr,index-1,toFind-arr[index]);
+      
+    }
+
+    public boolean canPartition(int[] arr) {
+         
+         int sum=0;
+        
+        for(int i:arr)
+           sum+=i;
+        if(sum%2!=0)
+          return false;
+         else{
+             int toFind=(sum/2);
+             int lastElementIndex=arr.length-1;
+             
+             return findSum(arr,lastElementIndex,toFind);   
+           
+         }
+      }
+}
