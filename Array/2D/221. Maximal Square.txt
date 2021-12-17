@@ -1,0 +1,30 @@
+class Solution {
+
+    public int maximalSquare(char[][] matrix) {
+        
+        int max=0,min=0,currentValue;
+        
+        
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                
+                if(!(i==0||j==0)&&matrix[i][j]!='0'){
+               
+                    min = Math.min(matrix[i][j-1],matrix[i-1][j-1]);
+                    min = Math.min(min,matrix[i-1][j]);
+                    matrix[i][j] = (char)(min+1);  
+                    
+                }
+                
+                currentValue=matrix[i][j]-'0';
+                
+                if(currentValue>max)
+                    max=currentValue;
+                
+            }
+        }
+        
+        return max*max;
+        
+    }
+}
