@@ -1,0 +1,84 @@
+class Solution {
+    
+    
+    String makeItKTimes(String s,int k){
+        
+        String res="";
+        
+        for(int i=0;i<k;i++)
+           res+=s;   
+        
+        return res;
+        
+    }
+    
+    boolean isNum(String val){
+        
+        return (val.charAt(0) >= '0' && val.charAt(0) <= '9')?true:false;
+   
+    }
+    
+    String fetchWord(Stack<String> st){
+          
+           String res="";
+                
+            while(!st.peek().equals("[")){
+                    res=st.pop()+res;
+            }
+        
+         return res;
+                
+    }
+    
+    int fetchNumber(Stack<String> st){
+        
+            String num="";
+            while(st.size()>0&&isNum(st.peek()))
+                    num=st.pop()+num;
+                
+            return Integer.parseInt(num);   
+        
+    }
+    
+    
+    public String decodeString(String s) {
+        
+        String res="",num="";
+        int k=0;
+        
+        Stack<String> st=new Stack<String>();
+       
+        
+        for(int i=0;i<s.length();i++){
+              
+            if(s.charAt(i)==']'){
+              
+                //fetch word till '['
+                res=fetchWord(st);
+                                
+                //pop the opening bracket
+                st.pop();
+            
+                //fetch number 
+                k=fetchNumber(st);
+                
+                //make the word k times and push
+                st.push( makeItKTimes(res,k) );
+                
+            }
+            else
+                st.push(""+s.charAt(i));
+         
+        }
+        
+        //pop every thing out of stack and append to front of result 
+        res="";
+        while(!st.isEmpty()){
+            res=st.pop()+res;
+        }
+        
+     
+        return res;
+    
+    }
+}
