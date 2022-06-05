@@ -1,0 +1,40 @@
+class Solution {
+    
+    HashSet<Integer> columnEliminated;
+    HashSet<Integer> rightDiagonal;
+    HashSet<Integer> leftDiagonal;
+    int result;
+     
+     void backtrackNPlace(int r,int n){
+         if(r==n){
+             result+=1;
+             return;
+         }
+         
+         for(int i=0;i<n;i++){
+             if(!(columnEliminated.contains(i)||rightDiagonal.contains(i+r)||leftDiagonal.contains(r-i))){
+                 columnEliminated.add(i);
+                 rightDiagonal.add(r+i);
+                 leftDiagonal.add(r-i);
+                 backtrackNPlace(r+1,n);
+                 columnEliminated.remove(i);
+                 rightDiagonal.remove(r+i);
+                 leftDiagonal.remove(r-i);
+                 
+             }
+                 
+         }
+     }
+    
+    public int totalNQueens(int n) {
+        
+      columnEliminated=new HashSet<>();
+      rightDiagonal=new HashSet<>();
+      leftDiagonal=new HashSet<>();
+      result=0;
+      backtrackNPlace(0,n);
+        return result;
+         
+    }
+    
+}
