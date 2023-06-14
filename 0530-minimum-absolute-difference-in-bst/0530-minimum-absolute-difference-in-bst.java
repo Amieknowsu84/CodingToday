@@ -23,7 +23,7 @@ class Solution {
         }  
         
         if(prev != null){
-           res = Math.min(res,Math.abs(root.val-prev));
+           res = Math.min(res,root.val-prev);
         }
         prev = root.val;
         
