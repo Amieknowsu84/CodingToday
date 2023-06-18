@@ -1,54 +1,50 @@
 class Solution {
-    int m;
-    int n;
-    private int mod=1000000007;
-    
+    private static final int MOD = 1000000007;
+    private int m;
+    private int n;
+    private int[][] dp;
+    private int[][] matrix;
+    private int[][] directions = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
     
     public int countPaths(int[][] matrix) {
-       m=matrix.length;
-       n=matrix[0].length;
-       int[][] dp=new int[m][n];
-       for(int row[]:dp){
-          Arrays.fill(row,-1);
-       }
-        
-      int sum=0;
-       for(int i=0;i<matrix.length;i++){
-           for(int j=0;j<matrix[0].length;j++){
-               sum=(sum+dfs(matrix,dp,i,j)%mod)%mod;
-           }
-       }
-        
-       return sum; 
+        this.matrix = matrix;
+        m = matrix.length;
+        n = matrix[0].length;
+        dp = new int[m][n];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+        int sum = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                sum = (sum + dfs(i, j)) % MOD;
+            }
+        }
+        return sum;
     }
     
-    
-    int dfs(int[][] matrix,int[][] dp,int i,int j){
-         
-        if(!inBoundaries(i,j)){
+    private int dfs(int i, int j) {
+        if (!inBoundaries(i, j)) {
             return 0;
         }
         
-        if(dp[i][j]!=-1){
+        if (dp[i][j] != -1) {
             return dp[i][j];
         }
-            
-        int row[]={1,0,0,-1};
-        int col[]={0,1,-1,0};
-        int sum=1;
-        for(int k=0;k<row.length;k++){
-            int ni=i+row[k];
-            int nj=j+col[k];
-           if(inBoundaries(ni,nj) && matrix[i][j]<matrix[ni][nj] ){
-               sum+=(dfs(matrix,dp,ni,nj)%mod);
-           }
+        
+        int sum = 1;
+        for (int[] dir : directions) {
+            int ni = i + dir[0];
+            int nj = j + dir[1];
+            if (inBoundaries(ni, nj) && matrix[i][j] < matrix[ni][nj]) {
+                sum = (sum + dfs(ni, nj)) % MOD;
+            }
         }
         
-        return dp[i][j]=sum%mod;
-        
+        return dp[i][j] = sum % MOD;
     }
     
-    boolean inBoundaries(int i, int j){
-        return (i>=0 && i<m && j>=0 && j<n);
+    private boolean inBoundaries(int i, int j) {
+        return i >= 0 && i < m && j >= 0 && j < n;
     }
 }
