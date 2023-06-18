@@ -28,9 +28,9 @@ class Solution {
         while(!queue.isEmpty()){
             long levelSum = 0;
             int size = queue.size();
-            for(int i=0; i<size; i++){
-                TreeNode node=queue.poll();
-                levelSum+=node.val;
+            for(int i = 0; i < size; i++){
+                TreeNode node = queue.poll();
+                levelSum += node.val;
                 
                 if(node.left != null){
                     queue.add(node.left);
