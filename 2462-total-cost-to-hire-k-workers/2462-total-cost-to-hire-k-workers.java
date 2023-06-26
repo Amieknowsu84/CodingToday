@@ -1,39 +1,30 @@
 class Solution {
     public long totalCost(int[] costs, int k, int candidates) {
-        PriorityQueue<Integer> lpq = new PriorityQueue<>();
-        PriorityQueue<Integer> rpq = new PriorityQueue<>();
-        long cost = 0;
+        int i = 0;
+        int j = costs.length - 1;
+        PriorityQueue<Integer> pq1 = new PriorityQueue<>();
+        PriorityQueue<Integer> pq2 = new PriorityQueue<>();
 
-        int rb = candidates;
-        for (int i = 0; i < candidates; i++) {
-            lpq.add(costs[i]);
-        }
+        long ans = 0;
+        while (k-- > 0) {
+            while (pq1.size() < candidates && i <= j) {
+                pq1.offer(costs[i++]);
+            }
+            while (pq2.size() < candidates && i <= j) {
+                pq2.offer(costs[j--]);
+            }
 
-        int lb = costs.length - candidates - 1;
+            int t1 = pq1.size() > 0 ? pq1.peek() : Integer.MAX_VALUE;
+            int t2 = pq2.size() > 0 ? pq2.peek() : Integer.MAX_VALUE;
 
-        for (int i = (rb > lb) ? rb : lb + 1; i < costs.length; i++) {
-            rpq.add(costs[i]);
-        }
-
-        for (int i = 0; i < k; i++) {
-            int leftElem = lpq.isEmpty() ? Integer.MAX_VALUE : lpq.peek();
-            int rightElem = rpq.isEmpty() ? Integer.MAX_VALUE : rpq.peek();
-
-            if (leftElem <= rightElem) {
-                cost += lpq.remove();
-                if (rb <= lb && rb < costs.length) {
-                    lpq.add(costs[rb]);
-                    rb++;
-                }
+            if (t1 <= t2) {
+                ans += t1;
+                pq1.poll();
             } else {
-                cost += rpq.remove();
-                if (rb <= lb && lb >= 0) {
-                    rpq.add(costs[lb]);
-                    lb--;
-                }
+                ans += t2;
+                pq2.poll();
             }
         }
-
-        return cost;
+        return ans;
     }
 }
