@@ -1,36 +1,17 @@
 class Solution {
-   //   0 1   2 3 4 5
-   //  [2, 1, 5,6,2,3]
-   // nse left[-1,-1,1,2,1,4]
-   // nse right[1,-1,4,4,-1,-1]
+
     public int largestRectangleArea(int[] heights) {
         int[] left=nseLeft(heights);
         int[] right=nseRight(heights);
-//         String result1 = Arrays.stream(left)
-//             .mapToObj(String::valueOf)
-//             .collect(Collectors.joining(" "));
-        
-//         System.out.println(result1);
-        
-//         String result2 = Arrays.stream(right)
-//             .mapToObj(String::valueOf)
-//             .collect(Collectors.joining(" "));
-        
-//        System.out.println(result2);
-
-
-         int maxArea=0;
+        int maxArea=0;
          
         for(int i=0;i<heights.length;i++){
             int maxLeft=left[i];
             int maxRight=right[i];
             int value=(maxRight-maxLeft-1)*heights[i];
-            //System.out.println(value);
             maxArea= Math.max(maxArea,value);
         } 
-         
-         return maxArea;
-         
+         return maxArea;    
     }
     
     
