@@ -3,7 +3,8 @@ class Solution {
     //The solution set must not contain duplicate subsets
     //Return the solution in any order.
 
- 
+    //TC- O(2^N)
+    //SC- O(N) recursive stack space + O(N) linked list
     
     List<List<Integer>> result;
     
