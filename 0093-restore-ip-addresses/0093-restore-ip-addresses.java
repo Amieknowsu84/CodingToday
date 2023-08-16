@@ -12,13 +12,15 @@ class Solution {
     
     void solve(String s,int start,LinkedList<String> list){
         
-        if(list.size()==4 && start==s.length()){
+        if(list.size() > 4){
+            return;
+        }
+        
+        if(start == s.length() && list.size() == 4){
             result.add(String.join(".", list));
         }
         
-        if(list.size()>4 || start>=s.length() ){
-            return;
-        }
+        
         
         for(int i=start;i<s.length();i++){
             
@@ -38,15 +40,13 @@ class Solution {
         if(s.length() > 3){
             return false;
         }
-        
         if(s.charAt(0)=='0'){
             return s.length() == 1;
         }
         if(s.length()==3){
-         int num=Integer.parseInt(s);
+          int num=Integer.parseInt(s);
           return num<=255;
         }
-        
         return true;
     }
     
