@@ -3,7 +3,7 @@
     int[] DIR = new int[]{0, 1, 0, -1, 0};
     public int[][] updateMatrix(int[][] mat) {
         int m = mat.length, n = mat[0].length; // The distance of cells is up to (M+N)
-        Queue<int[]> q = new ArrayDeque<>();
+        Queue<int[]> q = new LinkedList<>();
         for (int r = 0; r < m; ++r)
             for (int c = 0; c < n; ++c)
                 if (mat[r][c] == 0) q.offer(new int[]{r, c});
