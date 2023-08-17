@@ -1,9 +1,4 @@
 class Solution {
-    
-//      0 1 2 3 4
-//     [5,3]
-         
-//          sum=8/4
          
     int cnt;
     int side;
@@ -17,12 +12,12 @@ class Solution {
         }
         side=sum/4;
         indices=new HashSet<>();
-        return solve(matchsticks,side,new LinkedList<Integer>(),0);
+        return solve(matchsticks,side,new HashSet<Integer>(),0);
         
     }
     
     
-    boolean solve(int[] matchsticks,int target,LinkedList<Integer> list,int index){
+    boolean solve(int[] matchsticks,int target,HashSet<Integer> list,int index){
         
         if(target==0){
             cnt++;
@@ -32,7 +27,7 @@ class Solution {
             if(cnt==4){
                return true; 
             }else{
-                result = solve(matchsticks,side,new LinkedList<Integer>(),0);
+                result = solve(matchsticks,side,new HashSet<Integer>(),0);
             }
             indices.removeAll(list);
             cnt--;
@@ -45,7 +40,7 @@ class Solution {
                 if(solve(matchsticks,target-matchsticks[i],list,i+1)){
                     return true;
                 }
-                list.removeLast();
+                list.remove(i);
             }
         }
         
