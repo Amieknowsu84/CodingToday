@@ -30,7 +30,7 @@ class Solution {
             indices.addAll(list);
             boolean result=false;
             if(cnt==4){
-               result=true; 
+               return true; 
             }else{
                 result = solve(matchsticks,side,new LinkedList<Integer>(),0);
             }
