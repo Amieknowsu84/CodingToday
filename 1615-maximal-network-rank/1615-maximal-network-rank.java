@@ -13,8 +13,9 @@ class Solution {
         int max = 0;
         
         for (int i = 0; i < n; i++) {
+            int iSize=adj.get(i).size();
             for (int j = i + 1; j < n; j++) {
-                int sum = adj.get(i).size() + adj.get(j).size();
+                int sum = iSize + adj.get(j).size();
                 if (adj.get(i).contains(j)) {
                     sum--;
                 }
