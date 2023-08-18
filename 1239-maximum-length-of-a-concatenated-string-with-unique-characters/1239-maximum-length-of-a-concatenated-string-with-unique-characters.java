@@ -1,49 +1,54 @@
 class Solution {
-    int count[];
     int max;
-    
+
     public int maxLength(List<String> arr) {
-        count=new int[26];
-        max=0;
-        solve(arr,0,0,new LinkedList<>());
+        max = 0;
+        solve(arr, 0, 0, new HashSet<>());
         return max;
     }
-    
-     void solve(List<String> arr,int cnt,int index,LinkedList<String> result){
-         
-         if(!containsDuplicate(String.join("", result))){
-             max=Math.max(max,cnt);
-         }else{
-             return;
-         }
-         
-         if(index>=arr.size()){
-             return;
-         }
-         
-         for(int i=index;i<arr.size();i++){
-                String str=arr.get(i);
-                cnt+=str.length();
-                result.add(arr.get(i));
-                solve(arr,cnt,i+1,result);
-                result.removeLast();
-                cnt-=str.length();
+
+    void solve(List<String> arr, int index, int currentLength, Set<Character> charSet) {
+        max = Math.max(max, currentLength);
+
+        for (int i = index; i < arr.size(); i++) {
+            String str = arr.get(i);
+            if (!hasDuplicates(str) && canAddString(str, charSet)) {
+                addStringToSet(str, charSet);
+                solve(arr, i + 1, currentLength + str.length(), charSet);
+                removeStringFromSet(str, charSet);
+            }
         }
     }
-         
-    
-    
-     boolean containsDuplicate(String s){
-         int count[]=new int[26];
-        for(int i=0;i<s.length();i++){
-            count[s.charAt(i)-'a']++;
+
+    boolean canAddString(String str, Set<Character> charSet) {
+
+        for (char c : str.toCharArray()) {
+            if (charSet.contains(c)) {
+                return false;
+            }
         }
-          for(int i=0;i<s.length();i++){
-            if(count[s.charAt(i)-'a']>1){
+        return true;
+    }
+
+    void addStringToSet(String str, Set<Character> charSet) {
+        for (char c : str.toCharArray()) {
+            charSet.add(c);
+        }
+    }
+
+    void removeStringFromSet(String str, Set<Character> charSet) {
+        for (char c : str.toCharArray()) {
+            charSet.remove(c);
+        }
+    }
+    
+    boolean hasDuplicates(String str) {
+        Set<Character> charSet = new HashSet<>();
+        for (char c : str.toCharArray()) {
+            if (!charSet.add(c)) {
                 return true;
             }
         }
-         return false;
+        return false;
     }
-
 }
