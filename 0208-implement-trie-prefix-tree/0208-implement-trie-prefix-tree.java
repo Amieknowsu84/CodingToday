@@ -3,7 +3,6 @@ class Trie {
     Node parent;
 
     class Node{
-        
        char character;
        Node child[];
        boolean end;
@@ -19,7 +18,6 @@ class Trie {
     }
     
     public void insert(String word) {
-        
         Node current=parent;
         
         for(char character: word.toCharArray()){
@@ -33,33 +31,27 @@ class Trie {
         current.end=true;
     }
     
-    public boolean search(String word) {
+    private Node searchPrefix(String prefix) {
+        Node current = parent;
         
-        Node current=parent;
-        
-         for(char character: word.toCharArray()){
-            int index = character-'a';
-            if(current.child[index] == null){
-               return false;
+        for (char c : prefix.toCharArray()) {
+            int index = c - 'a';
+            if (current.child[index] == null) {
+                return null;
             }
-            current=current.child[index];
+            current = current.child[index];
         }
         
-        return current.end;
+        return current;
+    }
+    
+    public boolean search(String word) {
+        Node current = searchPrefix(word);
+        return current!=null && current.end;
     }
     
     public boolean startsWith(String prefix) {
-        Node current=parent;
-        
-         for(char character: prefix.toCharArray()){
-            int index = character-'a';
-            if(current.child[index] == null){
-               return false;
-            }
-            current=current.child[index];
-        }
-        
-        return true;
+       return searchPrefix(prefix) != null;
     }
 }
 
