@@ -69,10 +69,13 @@ class Solution {
         
         char character=board[i][j];
         board[i][j]='$';
-        solve(i+1,j,current.child[index]);
-        solve(i-1,j,current.child[index]);
-        solve(i,j+1,current.child[index]);
-        solve(i,j-1,current.child[index]);
+        
+        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        for (int[] dir : directions) {
+            int newRow = i + dir[0];
+            int newCol = j + dir[1];
+            solve(newRow, newCol, current.child[index]);
+        }
         board[i][j]=character;
             
     }
