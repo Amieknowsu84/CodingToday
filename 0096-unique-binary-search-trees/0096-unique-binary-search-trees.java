@@ -1,7 +1,13 @@
 class Solution {
+    Integer dp[]=new Integer[20];
+    
     public int numTrees(int n) {
         if(n <= 1){
             return 1;
+        }
+        
+        if(dp[n]!=null){
+            return dp[n];
         }
         
         int sum=0;
@@ -10,6 +16,6 @@ class Solution {
             sum+=numTrees(i-1)*numTrees(n-i);
         }
         
-        return sum;
+        return dp[n]=sum;
     }
 }
