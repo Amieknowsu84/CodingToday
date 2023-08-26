@@ -1,7 +1,6 @@
 class Solution {
     public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
         
-        
         List<ArrayList<Integer>> adjacency = new ArrayList<>();
         for(int i=0;i<n;i++){
             adjacency.add(new ArrayList<>());
@@ -11,20 +10,10 @@ class Solution {
             adjacency.get(edge[0]).add(edge[1]);
              adjacency.get(edge[1]).add(edge[0]);
         }
-        
-    
-        
+            
         return findMinTime(0,adjacency,hasApple,-1);
         
     }
-    
-//     0 -> 1,2
-//     1 -> 0,4,5
-//     2 -> 0,3,6
-//     3 -> 2
-//     4 -> 1
-//     5 -> 1
-//     6 -> 2   
         
     
     
