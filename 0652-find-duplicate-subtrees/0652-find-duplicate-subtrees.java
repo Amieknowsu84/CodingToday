@@ -33,10 +33,10 @@ class Solution {
      
         String res=root.val+","+findDuplicates(root.left)
                    +","+findDuplicates(root.right);
-        
-        if(!map.containsKey(res)){
+        int val= map.getOrDefault(res,0);
+        if(val == 0){
              map.put(res,1);
-        }else if(map.get(res)==1){
+        }else if(val == 1){
             map.put(res,2);
             result.add(root);
         }
