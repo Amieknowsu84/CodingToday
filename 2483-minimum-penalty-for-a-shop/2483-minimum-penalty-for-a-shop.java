@@ -9,20 +9,22 @@ class Solution {
         int open[]=new int[customers.length()+1];
         int closed[]=new int[customers.length()+1];
         int ncnt=0;
+        int ycnt=0;
+        closed[closed.length-1]=ycnt;
+        int j=customers.length()-1;
+        
         for(int i=0;i<customers.length();i++){
             open[i]=ncnt;
             if(customers.charAt(i)=='N')
                 ncnt++;
+             
+            if(customers.charAt(j-i)=='Y')
+                ycnt++;
+             closed[j-i]=ycnt;
         }
         open[open.length-1]=ncnt;
         
-        int ycnt=0;
-        closed[closed.length-1]=ycnt;
-        for(int i=customers.length()-1 ; i>=0 ;i--){
-            if(customers.charAt(i)=='Y')
-                ycnt++;
-             closed[i]=ycnt;
-        }
+        
         int min=Integer.MAX_VALUE;
         int index=-1;
          for(int i=0 ; i<open.length ;i++){
