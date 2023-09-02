@@ -21,13 +21,13 @@ class Solution {
         }
         
         int min=s.length();
-        
+        String curr="";
         for(int i=index;i<s.length();i++){
-            String left = s.substring(index,i+1);
-            if(stringSet.contains(left)){
+            curr+=s.charAt(i);
+            if(stringSet.contains(curr)){
                 min=Math.min(min,0+solve(i+1,s,stringSet));
             }else{
-                min=Math.min(min,left.length()+solve(i+1,s,stringSet));
+                min=Math.min(min,curr.length()+solve(i+1,s,stringSet));
             }
         }
         
