@@ -5,27 +5,22 @@ class Solution {
     // current = 3    
     // cnt = 1
     // [1,1,2,2,3]    
-    public int removeDuplicates(int[] nums) {
-     
-        int index = 0;
-        int current = nums[0];
-        int cnt=1;
-        
-        for(int i=1;i<nums.length;i++){
-            if(current == nums[i]){
-                if(cnt < 2){
-                    nums[++index]=current;
-                }
-                cnt++;
-            }else{
-                cnt=1;
-                current = nums[i];
-                nums[++index]= current;
-            }
-        }
-        
-        return index+1;
-        
-        
+    
+  public int removeDuplicates(int[] nums) {
+    int length = nums.length;
+    
+    if (length <= 2) {
+        return length;
     }
+    
+    int index = 2; // Start from the third element
+    for (int i = 2; i < length; i++) {
+        if (nums[i] != nums[index - 2]) {
+            nums[index++] = nums[i];
+        }
+    }
+    
+    return index;
+  }
+
 }
