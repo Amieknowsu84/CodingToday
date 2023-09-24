@@ -13,19 +13,14 @@ class Solution {
             char ca = (i>=0)?a.charAt(i):'0';
             char cb = (j>=0)?b.charAt(j):'0';   
             int cnt = getCount(ca,cb,carry);
-            if(cnt == 3){
+            sum = '0';
+            carry = '0';
+            if(cnt % 2 != 0){
                 sum = '1';
-                carry = '1';
-            }else if(cnt == 2){
-                sum = '0';
-                carry = '1';
-            }else if(cnt == 1){
-                 sum = '1';
-                 carry = '0';
-            }else{
-                sum = '0';
-                carry = '0';
             }
+            if(cnt == 3 || cnt == 2){
+                carry = '1';
+            }   
             res=sum+res;
         }
         
