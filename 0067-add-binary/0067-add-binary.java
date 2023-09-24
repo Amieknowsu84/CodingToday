@@ -12,7 +12,7 @@ class Solution {
         for(int i=a.length()-1,j=b.length()-1; (i>=0||j>=0); i--,j--){
             char ca = (i>=0)?a.charAt(i):'0';
             char cb = (j>=0)?b.charAt(j):'0';   
-            int cnt = getCount(ca,cb,carry);
+            int cnt = (ca-'0')+(cb-'0')+(carry-'0');
             sum = '0';
             carry = '0';
             if(cnt % 2 != 0){
@@ -28,24 +28,7 @@ class Solution {
             res=carry+res;
         }
         
-        
         return res;
-        
-        
     }
     
-    int getCount(char ca,char cb,char carry){
-         int cnt = 0;
-         if(carry == '1'){
-                cnt+=1;
-         } 
-        
-         if(ca=='1' && cb=='1'){
-             cnt+=2;
-         }else if(ca=='1' || cb=='1'){
-             cnt+=1;
-         }
-        
-        return cnt;
-    }
 }
