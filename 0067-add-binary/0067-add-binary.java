@@ -4,16 +4,14 @@ class Solution {
     
     public String addBinary(String a, String b) {
         
-        String reva = new StringBuilder(a).reverse().toString();
-        String revb = new StringBuilder(b).reverse().toString();
         
         char carry='0';
         char sum='0';
         String res="";
-        
-        for(int i=0,j=0;i<Math.max(reva.length(),revb.length());i++,j++){
-            char ca = (i<reva.length())?reva.charAt(i):'0';
-            char cb = (j<revb.length())?revb.charAt(j):'0';   
+    
+        for(int i=a.length()-1,j=b.length()-1; (i>=0||j>=0); i--,j--){
+            char ca = (i>=0)?a.charAt(i):'0';
+            char cb = (j>=0)?b.charAt(j):'0';   
             int cnt = getCount(ca,cb,carry);
             if(cnt == 3){
                 sum = '1';
@@ -28,16 +26,15 @@ class Solution {
                 sum = '0';
                 carry = '0';
             }
-             
-            res+=sum;
+            res=sum+res;
         }
         
         if(carry == '1'){
-            res+=carry;
+            res=carry+res;
         }
         
         
-        return new StringBuilder(res).reverse().toString();
+        return res;
         
         
     }
