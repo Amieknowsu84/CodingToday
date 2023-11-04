@@ -4,25 +4,30 @@ class Solution {
     
     public int countSquares(int[][] matrix) {
        
-        int[][] dp=new int[matrix.length][matrix[0].length];
+        
+        int prev[] = new int[matrix[0].length];
+        int curr[] = new int[matrix[0].length];
+        
         
         int cnt = 0;
         m = matrix.length;
         n = matrix[0].length;
         int val = 0;
         
-        for(int i=0; i<dp.length; i++){ 
-            for(int j=0; j<dp[0].length; j++){
+        for(int i=0; i<matrix.length; i++){ 
+            for(int j=0; j<matrix[0].length; j++){
                 val = 0;
-                if(isInboundary(i-1,j-1) && isInboundary(i,j-1)
+              if(isInboundary(i-1,j-1) && isInboundary(i,j-1)
                    && isInboundary(i-1,j) && matrix[i][j]!=0 ){
-                    val = Math.min(Math.min(dp[i-1][j-1],dp[i-1][j]),dp[i][j-1]) + 1;
+                    val = Math.min(Math.min(prev[j-1],prev[j]),curr[j-1]) + 1;
                 }else{
                     val = matrix[i][j];
                 }
                 cnt+= val;
-                dp[i][j] = val;
+                curr[j] = val;
             }
+             prev = curr;
+             curr = new int[matrix[0].length];
         }
         
         return cnt;
