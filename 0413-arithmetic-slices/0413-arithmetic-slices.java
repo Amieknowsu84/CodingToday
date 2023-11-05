@@ -26,7 +26,6 @@ class Solution {
         
     int result = 0;
     for(int i=0; i<list.size();i++){
-        System.out.println(list.get(i));
         int k = list.get(i)- 3 +1;
         result += (k*(k+1)/2);
     }
