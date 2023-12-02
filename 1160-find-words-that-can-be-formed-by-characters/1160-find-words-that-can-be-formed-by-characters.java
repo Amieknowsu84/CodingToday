@@ -14,14 +14,19 @@ class Solution {
     
     boolean canBeTaken(String word,int[] orignal){
         
-      HashMap<Character,Integer> map = new HashMap<>();
-      for(int i=0;i<word.length();i++){
-          map.put(word.charAt(i),map.getOrDefault(word.charAt(i),0)+1);
-      }
-        
-       return map.entrySet().stream()
-        .allMatch(entry -> orignal[entry.getKey() - 'a'] >= entry.getValue());
+      int[] wordFreq = new int[26];
 
+        for (int i = 0; i < word.length(); i++) {
+            wordFreq[word.charAt(i) - 'a']++;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (wordFreq[i] > orignal[i]) {
+                return false;
+            }
+        }
+
+        return true;
     
     }
 }
