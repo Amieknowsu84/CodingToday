@@ -8,8 +8,8 @@ class Solution {
         }
         
         return Arrays.stream(words)
-               .map((word)->canBeTaken(word,orignal)?word.length():0)
-               .reduce(0,Integer::sum);
+               .mapToInt((word)->canBeTaken(word,orignal)?word.length():0)
+               .sum();
     }
     
     boolean canBeTaken(String word,int[] orignal){
