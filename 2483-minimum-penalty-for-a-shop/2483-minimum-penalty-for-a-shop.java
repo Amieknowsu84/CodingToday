@@ -3,37 +3,42 @@ class Solution {
     // YYNY
     // 1223
     // [0,0,0,1,1]
-    // [3,2,1,1,0]    
+    // [3,2,1,1,0]   
+    
+//     cntC = 1  minindex = 2
+//     cntO = 1   minVal = 1
         
     public int bestClosingTime(String customers) {
-        int open[]=new int[customers.length()+1];
-        int closed[]=new int[customers.length()+1];
-        int ncnt=0;
-        int ycnt=0;
-        closed[closed.length-1]=ycnt;
-        int j=customers.length()-1;
+        int cntC=0;
+        int cntO=0;
         
-        for(int i=0;i<customers.length();i++){
-            open[i]=ncnt;
-            if(customers.charAt(i)=='N')
-                ncnt++;
-             
-            if(customers.charAt(j-i)=='Y')
-                ycnt++;
-             closed[j-i]=ycnt;
+        for(int i=0; i<customers.length(); i++){
+            if(customers.charAt(i)=='Y')
+                cntC++;
         }
-        open[open.length-1]=ncnt;
+        
+        int minIndex = 0;
+        int minValue = cntC;
+        int currentCnt = 0;
         
         
-        int min=Integer.MAX_VALUE;
-        int index=-1;
-         for(int i=0 ; i<open.length ;i++){
-             //System.out.println(open[i]+" "+closed[i]);
-             if(min > open[i]+closed[i]){
-                 min = open[i]+closed[i];
-                 index=i;
-             }
-         }
-        return index;
+        for(int i = 0; i <= customers.length(); i++){
+         
+            currentCnt = cntO + cntC;
+            if(currentCnt < minValue){
+                minValue = currentCnt;
+                minIndex = i;
+            }
+            
+            if(i!=customers.length() && customers.charAt(i) == 'N'){
+                cntO++;
+            }else{
+                cntC--;
+            }            
+
+        }
+    
+        return minIndex;
+        
     }
 }
