@@ -7,16 +7,15 @@ class Solution {
         int maxLen = 0;
         
         while(end < s.length()){
+            map[s.charAt(end)-'A']++;
             int mostFrequentCharCount = Arrays.stream(map).max().orElse(0);
-            int size = end-start;
+            int size = end-start+1;
             if(size - mostFrequentCharCount <= k){
-                map[s.charAt(end++)-'A']++;
-                size = end - start;
-                mostFrequentCharCount = Arrays.stream(map).max().orElse(0);
-                if(size - mostFrequentCharCount <= k)
-                  maxLen = Math.max(maxLen,end-start);
+                maxLen = Math.max(maxLen,size);
+                end++;
             }else{
                 map[s.charAt(start++)-'A']--;
+                map[s.charAt(end)-'A']--;
             }
         }
         
