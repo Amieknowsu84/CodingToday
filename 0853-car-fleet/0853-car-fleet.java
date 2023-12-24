@@ -15,11 +15,11 @@ class Solution {
         stack.push(positionSpeed[positionSpeed.length-1]);
         
         for(int i=positionSpeed.length-2 ; i>=0 ; i--){
-            //System.out.println(positionSpeed[i][0]+" "+positionSpeed[i][1]);
+            
             int[] peekElement=stack.peek();
             double peekElemtime = (double)(target-peekElement[0])/peekElement[1];
             double currentElemtime = (double)(target-positionSpeed[i][0])/positionSpeed[i][1];
-            //System.out.println(peekElemtime+" "+currentElemtime);
+        
             if(currentElemtime > peekElemtime){
                stack.push(positionSpeed[i]);
             }
