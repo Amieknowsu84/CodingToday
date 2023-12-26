@@ -4,17 +4,17 @@ class Solution {
     
     public List<String> generateParenthesis(int n) {
         result = new ArrayList<>();
-        generate(new StringBuilder(),1,1,n);
+        generate(new StringBuilder(),0,0,n);
         return result;
     }
     
     void generate(StringBuilder temp,int ob,int cb,int n){
-        if(ob+cb == 2*n+2){
+        if(ob+cb == 2*n){
             result.add(temp.toString());
             return;
         }
         
-        if(ob <= n){
+        if(ob < n){
             temp.append("(");
             generate(temp,ob+1,cb,n);
             temp.deleteCharAt(temp.length()-1);
