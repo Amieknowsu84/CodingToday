@@ -13,9 +13,6 @@ class Solution {
             result.add(temp.toString());
             return;
         }
-        if(ob+cb > 2*n+2){
-            return; 
-        }
         
         if(ob <= n){
             temp.append("(");
