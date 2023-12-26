@@ -4,13 +4,13 @@ class Solution {
     
     public List<String> generateParenthesis(int n) {
         result = new ArrayList<>();
-        generate("",1,1,n);
+        generate(new StringBuilder(),1,1,n);
         return result;
     }
     
-    void generate(String temp,int ob,int cb,int n){
+    void generate(StringBuilder temp,int ob,int cb,int n){
         if(ob+cb == 2*n+2){
-            result.add(temp);
+            result.add(temp.toString());
             return;
         }
         if(ob+cb > 2*n+2){
@@ -18,10 +18,14 @@ class Solution {
         }
         
         if(ob <= n){
-            generate(temp+"(",ob+1,cb,n);
+            temp.append("(");
+            generate(temp,ob+1,cb,n);
+            temp.deleteCharAt(temp.length()-1);
         }
         if(!temp.equals("") && cb<ob){
-            generate(temp+")",ob,cb+1,n);
+            temp.append(")");
+            generate(temp,ob,cb+1,n);
+            temp.deleteCharAt(temp.length()-1);
         }
         
     }
