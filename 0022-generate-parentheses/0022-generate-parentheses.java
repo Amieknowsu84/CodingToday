@@ -8,20 +8,20 @@ class Solution {
         return result;
     }
     
-    void generate(StringBuilder temp,int ob,int cb,int n){
-        if(ob+cb == 2*n){
+    void generate(StringBuilder temp,int openBracket,int closedBracket,int n){
+        if(openBracket+closedBracket == 2*n){
             result.add(temp.toString());
             return;
         }
         
-        if(ob < n){
+        if(openBracket < n){
             temp.append("(");
-            generate(temp,ob+1,cb,n);
+            generate(temp,openBracket+1,closedBracket,n);
             temp.deleteCharAt(temp.length()-1);
         }
-        if(!temp.equals("") && cb<ob){
+        if(!temp.equals("") && closedBracket<openBracket){
             temp.append(")");
-            generate(temp,ob,cb+1,n);
+            generate(temp,openBracket,closedBracket+1,n);
             temp.deleteCharAt(temp.length()-1);
         }
         
