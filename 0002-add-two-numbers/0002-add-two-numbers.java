@@ -7,14 +7,12 @@
  * }
  */
 class Solution {
-    int carry;
-    int sum;
-    ListNode thead,head;
     
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-         carry = 0; sum = 0;
+         int carry = 0, sum = 0;
          int val = 0;
          int l1Val = 0, l2Val = 0;
+         ListNode thead = null,head = null;
         
         while(l1 != null || l2 != null){
             l1Val = 0;
@@ -41,10 +39,12 @@ class Solution {
             }
         }
         
+        
         while(carry != 0){
             thead.next = new ListNode(carry);
             carry = carry/10;
         }
+        
         
       return head;  
     }
