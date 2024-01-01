@@ -14,9 +14,22 @@ class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
          carry = 0; sum = 0;
          int val = 0;
+         int l1Val = 0, l2Val = 0;
         
-        while(l1 != null && l2 != null){
-            val = (l1.val + l2.val + carry);
+        while(l1 != null || l2 != null){
+            l1Val = 0;
+            l2Val = 0;
+            
+            if(l1 != null){
+                l1Val = l1.val;
+                 l1 = l1.next;
+            }
+            if(l2 != null){
+                l2Val = l2.val;
+                l2 = l2.next;
+            }
+            
+            val = (l1Val + l2Val + carry);
             sum = val % 10; 
             carry = val / 10 ; 
             if(head == null){
@@ -26,17 +39,6 @@ class Solution {
                 thead.next = new ListNode(sum);
                 thead = thead.next;
             }
-            l1 = l1.next;
-            l2 = l2.next;
-            
-        }
-        
-        if(l1 != null){
-            copyRemaining(l1);
-        }
-        
-        if(l2 != null){
-            copyRemaining(l2);
         }
         
         while(carry != 0){
@@ -45,18 +47,6 @@ class Solution {
         }
         
       return head;  
-    }
-    
-    
-    void copyRemaining(ListNode l1){
-         int val = 0;
-         while(l1 != null){
-            val = (l1.val + carry);
-            carry = val/10;    
-            thead.next = new ListNode(val%10);
-            l1 = l1.next;
-            thead = thead.next; 
-        }
     }
     
 }
