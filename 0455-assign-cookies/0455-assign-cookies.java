@@ -3,24 +3,12 @@ class Solution {
         Arrays.sort(g);
         Arrays.sort(s);
         
-        int cnt = 0;
-        int index = 0;
-        int size = Math.min(g.length,s.length);
-        
-        for(int i=0; i < size;i++){
-            
-            if(index >= s.length)
-                return cnt;
-            
-            if(s[index] >= g[i]){
-                cnt++;
-            }else{
-                i--;
-            }
-            
-            index++;
+        int index = 0;        
+        for(int i=0; index < g.length && i< s.length; i++){            
+            if(g[index] <= s[i]) index++;
         }
         
-        return cnt;
+        return index;
+     
     }
 }
