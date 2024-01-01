@@ -40,8 +40,6 @@ class Solution {
        ListNode reverseHead = reverse(middle);
        ListNode thead = head,next = null, prev = null;
         
-       
-       System.out.println(cnt);
        while(thead != middle){
            next = thead.next;
            thead.next = reverseHead;
