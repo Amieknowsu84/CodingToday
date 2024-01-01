@@ -14,7 +14,7 @@ class Solution {
          int l1Val = 0, l2Val = 0;
          ListNode thead = null,head = null;
         
-        while(l1 != null || l2 != null){
+        while(l1 != null || l2 != null || carry != 0){
             l1Val = 0;
             l2Val = 0;
             
@@ -38,13 +38,6 @@ class Solution {
                 thead = thead.next;
             }
         }
-        
-        
-        while(carry != 0){
-            thead.next = new ListNode(carry);
-            carry = carry/10;
-        }
-        
         
       return head;  
     }
