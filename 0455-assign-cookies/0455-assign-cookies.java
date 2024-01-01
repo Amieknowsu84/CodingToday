@@ -5,12 +5,12 @@ class Solution {
         
         int cnt = 0;
         int index = 0;
+        int size = Math.min(g.length,s.length);
         
-        for(int i=0; i < g.length;i++){
+        for(int i=0; i < size;i++){
             
-            if(index >= s.length){
+            if(index >= s.length)
                 return cnt;
-            }
             
             if(s[index] >= g[i]){
                 cnt++;
