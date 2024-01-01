@@ -22,11 +22,7 @@ class Solution {
         
         //edge case when 1 or 2 elem 
         if(right == null){
-            if(left.next == null){
-                return null;
-            }else{
                 return left.next;
-            }
         }   
             
         
