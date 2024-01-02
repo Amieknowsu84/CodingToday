@@ -4,8 +4,6 @@ class Solution {
         List<List<Integer>> result = new ArrayList<>();
         int map[] = new int[201];
         
-        int maxCnt = 0;
-        
         for(int num:nums){
             map[num]++;
             if(result.size()<map[num]){
