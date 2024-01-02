@@ -8,22 +8,12 @@ class Solution {
         
         for(int num:nums){
             map[num]++;
-            if(map[num]>maxCnt){
-                maxCnt = map[num];
+            if(result.size()<map[num]){
+                result.add(new ArrayList<>());
             }
+            result.get(map[num]-1).add(num);
         }
         
-        for(int i=0;i<maxCnt;i++){
-            result.add(new ArrayList<>());
-        }
-        
-        for(int i=0; i<map.length; i++){
-            while(map[i] > 0){
-                   result.get(map[i]-1).add(i);
-                   map[i]--;
-            }
-        }
-    
         return result;
     }
 }
