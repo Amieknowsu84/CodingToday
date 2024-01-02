@@ -4,29 +4,26 @@ class Solution {
         List<List<Integer>> result = new ArrayList<>();
         int map[] = new int[201];
         
+        int maxCnt = 0;
+        
         for(int num:nums){
             map[num]++;
+            if(map[num]>maxCnt){
+                maxCnt = map[num];
+            }
         }
         
-        while(true){
-            
-            List<Integer> temp = new ArrayList<>();
-            
-            for(int i=0; i<map.length; i++){
-                if(map[i] > 0){
-                   temp.add(i);
+        for(int i=0;i<maxCnt;i++){
+            result.add(new ArrayList<>());
+        }
+        
+        for(int i=0; i<map.length; i++){
+            while(map[i] > 0){
+                   result.get(map[i]-1).add(i);
                    map[i]--;
-                }
-            }
-            
-            if(temp.size() == 0){
-                break;
-            }else{
-                //System.out.println(temp);
-                result.add(temp); 
             }
         }
-        
+    
         return result;
     }
 }
