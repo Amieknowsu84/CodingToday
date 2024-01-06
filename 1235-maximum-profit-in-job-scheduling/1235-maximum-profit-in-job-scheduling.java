@@ -30,16 +30,37 @@ class Solution {
         //don't include 
         netProfit = jobs(index+1,interval);
         
-        //if we incude
-         int i = 0;
-        //find the next intervals which has start time greater than equal to
-        //current end time
-        for(i = index+1 ; i < interval.length; i++){
-              if(interval[i][0] >= interval[index][1]){
-                  break;
-              }
-        }
+        // //if we incude
+        //  int i = 0;
+        // //find the next intervals which has start time greater than equal to
+        // //current end time
+        // for(i = index+1 ; i < interval.length; i++){
+        //       if(interval[i][0] >= interval[index][1]){
+        //           break;
+        //       }
+        // }
+        
+         int i = bsearch(index+1,interval,interval[index][1]);
         return cache[index]=Math.max(netProfit,interval[index][2]+jobs(i,interval));
+        
+    }
+    
+    int bsearch(int index,int[][] interval,int target){
+        int low = index;
+        int high = interval.length-1;
+        int ans = -1;
+        
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(interval[mid][0] >= target){
+                ans = mid;
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }
+        
+        return (ans == -1)?interval.length:ans;
         
     }
 }
