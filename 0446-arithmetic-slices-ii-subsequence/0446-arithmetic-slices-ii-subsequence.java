@@ -1,5 +1,6 @@
 class Solution {
-    int cnt=0;
+    
+    //https://www.youtube.com/watch?v=cau0JE1q_ZA&t=174s&ab_channel=codestorywithMIK
     
     public int numberOfArithmeticSlices(int[] nums) {
         int res = 0;
