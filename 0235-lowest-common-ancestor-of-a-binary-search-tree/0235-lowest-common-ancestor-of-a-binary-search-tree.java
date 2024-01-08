@@ -18,6 +18,7 @@ class Solution {
             return root;
         }
         
+        // p and q lies in either left subtree or right subtree
         if(p.val>root.val){
            return lowestCommonAncestor(root.right,p,q);
         }else{
