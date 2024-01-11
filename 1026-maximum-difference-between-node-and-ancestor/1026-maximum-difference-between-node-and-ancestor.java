@@ -24,20 +24,20 @@ class Solution {
         
     }
     
-    Pair<Integer,Integer> findMax(TreeNode root){
+    int[] findMax(TreeNode root){
         if(root == null){
-            return new Pair<>(Integer.MAX_VALUE,Integer.MIN_VALUE);
+            return new int[]{Integer.MAX_VALUE,Integer.MIN_VALUE};
         }
         
         int rootVal = root.val;
-        Pair<Integer,Integer> left = findMax(root.left);
-        Pair<Integer,Integer> right = findMax(root.right);
+        int[] left = findMax(root.left);
+        int[] right = findMax(root.right);
         //System.out.println(root.val +" "+left+" "+right+" ");
         
-        int min = Math.min(root.val,Math.min(left.getKey(),right.getKey()));
-        int max = Math.max(root.val,Math.max(right.getValue(),left.getValue()));
+        int min = Math.min(root.val,Math.min(left[0],right[0]));
+        int max = Math.max(root.val,Math.max(right[1],left[1]));
         
         maxDiff = Math.max(root.val-min,Math.max(max-root.val,maxDiff));
-        return new Pair<>(min,max);
+        return new int[]{min,max};
     }
 }
