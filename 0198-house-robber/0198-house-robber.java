@@ -1,19 +1,36 @@
 class Solution {
-    public int rob(int[] nums) {
-        
+    
+     public int rob(int[] nums) {
         if(nums.length == 1){
             return nums[0];
         }
-        
-        Integer[] dp = new Integer[nums.length];
+        int[] dp = new int[3];
         dp[0] = nums[0];
         dp[1] = Math.max(nums[1],nums[0]);
+        dp[2] = Math.max(dp[0],dp[1]); 
         
-        for(int i=2; i<dp.length; i++){
-            dp[i] = Math.max(dp[i-1],nums[i]+dp[i-2]); 
+        for(int i=2; i<nums.length; i++){
+            int prev = dp[1];
+            dp[2] = Math.max(dp[1],nums[i]+dp[0]);
+            dp[1] = dp[2];
+            dp[0] = prev;
         }
-        return dp[nums.length-1];
+        return dp[2];
     }
+    
+//     public int rob(int[] nums) {
+//         if(nums.length == 1){
+//             return nums[0];
+//         }
+//         Integer[] dp = new Integer[nums.length];
+//         dp[0] = nums[0];
+//         dp[1] = Math.max(nums[1],nums[0]);
+        
+//         for(int i=2; i<dp.length; i++){
+//             dp[i] = Math.max(dp[i-1],nums[i]+dp[i-2]); 
+//         }
+//         return dp[nums.length-1];
+//     }
     
     public int rob(int index,int[] nums,Integer[] dp) {
        if(index == 0){
