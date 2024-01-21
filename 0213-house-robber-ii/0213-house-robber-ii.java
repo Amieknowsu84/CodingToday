@@ -29,10 +29,6 @@ class Solution {
     }
     
     public static List<Integer> sliceArrayToList(int[] array, int startIndex, int endIndex) {
-        if (startIndex < 0 || endIndex > array.length || startIndex > endIndex) {
-            throw new IllegalArgumentException("Invalid indices");
-        }
-
         int[] slicedArray = Arrays.copyOfRange(array, startIndex, endIndex);
 
         List<Integer> resultList = new ArrayList<>();
