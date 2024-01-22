@@ -11,7 +11,7 @@ class Solution {
                 lis.add(num);
             }else{
                 //find the position that is <= target elemenet
-                int insertIndex = bs(lis,num);
+                int insertIndex = bs1(lis,num);
                 //insert at that pos
                 lis.set(insertIndex,num);
             }
@@ -38,7 +38,7 @@ class Solution {
     
     
     int bs1(List<Integer> list, int target){
-        //System.out.println(list+" "+target);
+       // System.out.println(list+" "+target);
         int lo = 0;
         int hi = list.size()-1;
         int ans = 0;
@@ -49,7 +49,7 @@ class Solution {
                 return mid;
             }else if(list.get(mid) < target){
                 lo = mid+1;
-                ans = mid;
+                ans = lo;
             }else{
                 hi = mid-1;
             }
