@@ -35,4 +35,29 @@ class Solution {
         }
         return lo;
     }
+    
+    
+    int bs1(List<Integer> list, int target){
+        //System.out.println(list+" "+target);
+        int lo = 0;
+        int hi = list.size()-1;
+        int ans = 0;
+        
+        while(lo<=hi){
+            int mid = (lo+hi)/2;
+            if(list.get(mid) == target){
+                return mid;
+            }else if(list.get(mid) < target){
+                lo = mid+1;
+                ans = mid;
+            }else{
+                hi = mid-1;
+            }
+            
+        }
+        // System.out.println(ans);
+        return ans;
+    }
+    
+    
 }
