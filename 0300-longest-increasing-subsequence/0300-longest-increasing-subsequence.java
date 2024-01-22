@@ -20,6 +20,7 @@ class Solution {
         return lis.size();
     }
     
+        
     int bs(List<Integer> list, int target){
         int lo = 0;
         int hi = list.size()-1;
