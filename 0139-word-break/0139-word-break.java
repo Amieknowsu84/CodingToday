@@ -1,11 +1,9 @@
 class Solution {
 
     public boolean wordBreak(String s, List<String> wordDict) {
-         
          HashSet<String> set=new HashSet<>(wordDict);
          Boolean map[]=new Boolean[s.length()+1];
          return convert(s,set,new StringBuilder(),0,map);
-        
     }
 
     boolean convert(String s,HashSet<String> set,StringBuilder sb,int index,
