@@ -3,18 +3,18 @@ class Solution {
 
     public int maxLength(List<String> arr) {
         max = 0;
-        solve(arr, 0, 0, new HashSet<>());
+        solve(arr, 0, new HashSet<>());
         return max;
     }
 
-    void solve(List<String> arr, int index, int currentLength, Set<Character> charSet) {
-        max = Math.max(max, currentLength);
-
+    void solve(List<String> arr, int index, Set<Character> charSet) {
+     
         for (int i = index; i < arr.size(); i++) {
             String str = arr.get(i);
             if (!hasDuplicates(str) && canAddString(str, charSet)) {
                 addStringToSet(str, charSet);
-                solve(arr, i + 1, currentLength + str.length(), charSet);
+                max = Math.max(max, charSet.size());
+                solve(arr, i + 1, charSet);
                 removeStringFromSet(str, charSet);
             }
         }
