@@ -11,8 +11,7 @@ class Solution {
      
         for (int i = index; i < arr.size(); i++) {
             String str = arr.get(i);
-            if (!hasDuplicates(str) && canAddString(str, charSet)) {
-                addStringToSet(str, charSet);
+            if (canAddString(str, charSet)) {
                 max = Math.max(max, charSet.size());
                 solve(arr, i + 1, charSet);
                 removeStringFromSet(str, charSet);
@@ -21,10 +20,15 @@ class Solution {
     }
 
     boolean canAddString(String str, Set<Character> charSet) {
-
+        Set<Character> charSetPrev = new HashSet<>(charSet);
+        //System.out.println(str);
         for (char c : str.toCharArray()) {
             if (charSet.contains(c)) {
+                charSet.clear();
+                charSet.addAll(charSetPrev);
                 return false;
+            }else{
+                charSet.add(c);
             }
         }
         return true;
