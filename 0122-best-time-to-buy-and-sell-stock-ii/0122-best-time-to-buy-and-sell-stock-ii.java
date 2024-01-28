@@ -3,21 +3,30 @@ class Solution {
     Integer dp[][];
     public int maxProfit(int[] prices) {
         max = 0;
-        dp = new Integer[prices.length][2];
-        boolean buyflag = true;
+        //dp = new Integer[prices.length][2];
+        //boolean buyflag = true;
        // return maxProfit(prices,0,buyflag);
-        dp[prices.length-1][1] = Math.max(-prices[prices.length-1],0);
-        dp[prices.length-1][0] = prices[prices.length-1];
+        //dp[prices.length-1][1] = Math.max(-prices[prices.length-1],0);
+        //dp[prices.length-1][0] = prices[prices.length-1];
+        
+        int[] prev = new int[2];
+        int[] curr = new int[2];
+        prev[1] = Math.max(-prices[prices.length-1],0);
+        prev[0] = prices[prices.length-1];
+        
         for(int i=prices.length-2;i>=0;i--){
             for(int j=0;j<2;j++){
                 if(j == 1)
-                 dp[i][j] = Math.max(-prices[i]+dp[i+1][1-j],dp[i+1][j]);
+                 curr[j] = Math.max(-prices[i]+prev[1-j],prev[j]);
                 else
-                 dp[i][j] = Math.max(prices[i]+dp[i+1][1-j],dp[i+1][j]);
+                 curr[j] = Math.max(prices[i]+prev[1-j],prev[j]);
             }
+            prev = curr;
+            curr = new int[2];
+            
         }
         
-        return dp[0][1];
+        return prev[1];
         
         
     }
