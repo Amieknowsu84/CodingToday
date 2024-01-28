@@ -5,7 +5,21 @@ class Solution {
         max = 0;
         dp = new Integer[prices.length][2];
         boolean buyflag = true;
-        return maxProfit(prices,0,buyflag);
+       // return maxProfit(prices,0,buyflag);
+        dp[prices.length-1][1] = Math.max(-prices[prices.length-1],0);
+        dp[prices.length-1][0] = prices[prices.length-1];
+        for(int i=prices.length-2;i>=0;i--){
+            for(int j=0;j<2;j++){
+                if(j == 1)
+                 dp[i][j] = Math.max(-prices[i]+dp[i+1][1-j],dp[i+1][j]);
+                else
+                 dp[i][j] = Math.max(prices[i]+dp[i+1][1-j],dp[i+1][j]);
+            }
+        }
+        
+        return dp[0][1];
+        
+        
     }
     
     int maxProfit(int[] prices,int index,boolean buyflag){
