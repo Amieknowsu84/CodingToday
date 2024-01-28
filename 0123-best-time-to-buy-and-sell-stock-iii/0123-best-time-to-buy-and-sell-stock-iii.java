@@ -11,8 +11,8 @@ class Solution {
         int[][] curr = new int[2][3];
         prev[1][2] = prev[1][1] = Math.max(-prices[prices.length-1],0);
         prev[0][2] = prev[0][1] = prices[prices.length-1];
-        prev[1][0] = 0;
-        prev[0][0] = 0;
+        // prev[1][0] = 0;
+        // prev[0][0] = 0;
         
         for(int i=prices.length-2;i>=0;i--){
             for(int j=0;j<2;j++){
