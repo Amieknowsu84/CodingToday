@@ -29,9 +29,9 @@ class Solution {
         for(int i=0;i<left.length;i++){
             left[i] = result;
             result = Math.max(result,heights[i]);
-            System.out.print(left[i]+" ");
+            //System.out.print(left[i]+" ");
         }
-        System.out.println();
+        //System.out.println();
     }
      
  //     0 1 2 3 4 5 6 7 8 9 10 11
@@ -48,7 +48,7 @@ class Solution {
            right[i] = result;  
            result = Math.max(result,heights[i]); 
         }
-        Arrays.stream(right).forEach((h)->System.out.print(h+" ")); 
+       // Arrays.stream(right).forEach((h)->System.out.print(h+" ")); 
         //System.out.println();
         
     }
