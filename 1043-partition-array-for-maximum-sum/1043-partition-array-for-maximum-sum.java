@@ -12,14 +12,14 @@ class Solution {
        // 1 15 7 9 2 5 10
         // Integer dp[] = new Integer[arr.length];
         // return partition(0,arr,k,dp);
-        int dp[] = new int[arr.length];
+        int dp[] = new int[arr.length+1];
         dp[arr.length-1] = arr[arr.length-1];
         
         for(int i=arr.length-1;i>=0;i--){
             int max = Integer.MIN_VALUE;
             for(int j=i;j<Math.min(arr.length,i+k);j++){
                  max = Math.max(max,arr[j]);
-                 int calc = ((j-i+1)*max + ((j+1>=arr.length)?0:dp[j+1]));
+                 int calc = (j-i+1)*max + dp[j+1];
                  //System.out.println(max+" -- "+dp[i]+" -- "+calc);
                  dp[i] = Math.max(dp[i],calc);
             }
