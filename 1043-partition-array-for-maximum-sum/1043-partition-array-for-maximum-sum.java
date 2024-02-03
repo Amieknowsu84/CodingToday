@@ -10,15 +10,28 @@ class Solution {
           
     public int maxSumAfterPartitioning(int[] arr, int k) {
        // 1 15 7 9 2 5 10
-        Integer dp[] = new Integer[arr.length];
-        return partition(0,arr,k,dp);
+        // Integer dp[] = new Integer[arr.length];
+        // return partition(0,arr,k,dp);
+        int dp[] = new int[arr.length];
+        dp[arr.length-1] = arr[arr.length-1];
+        
+        for(int i=arr.length-1;i>=0;i--){
+            int max = Integer.MIN_VALUE;
+            for(int j=i;j<Math.min(arr.length,i+k);j++){
+                 max = Math.max(max,arr[j]);
+                 int calc = ((j-i+1)*max + ((j+1>=arr.length)?0:dp[j+1]));
+                 //System.out.println(max+" -- "+dp[i]+" -- "+calc);
+                 dp[i] = Math.max(dp[i],calc);
+            }
+        }
+        
+        return dp[0];
     }
     
     int partition(int si,int[] arr,int k,Integer dp[]){
         if(si >= arr.length){
              return 0;  
         }
-        
         if(dp[si]!=null){
             return dp[si];
         }
