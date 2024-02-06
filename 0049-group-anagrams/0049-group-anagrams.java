@@ -7,11 +7,8 @@ class Solution {
             Arrays.sort(chars);
             String sortedWord = new String(chars);
             
-            if (!map.containsKey(sortedWord)) {
-                map.put(sortedWord, new ArrayList<>());
-            }
-            
-            map.get(sortedWord).add(word);
+            List<String> current = map.computeIfAbsent(sortedWord,k->new ArrayList<>());
+            current.add(word);
         }
         
         return new ArrayList<>(map.values());
