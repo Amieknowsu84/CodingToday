@@ -6,7 +6,7 @@ class Solution {
     int dfs(int row,int column1,int column2){
         
     
-        if(row<0||column1<0||column2<0||row>=dp.length||
+        if(column1<0||column2<0||row>=dp.length||
            column1>=dp[0].length||column2>=dp[0].length){
             return 0;
         }
