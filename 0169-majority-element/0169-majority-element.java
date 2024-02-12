@@ -1,22 +1,24 @@
 class Solution {
     public int majorityElement(int[] nums) {
   
-        int count1=0;
-        Integer majority1=null;
+        int cnt=1;
+        int majorityElement = nums[0];
         
         //moore algorithm
-        for(int i=0;i<nums.length;i++){
-            if(majority1!=null && nums[i] == majority1){
-                count1++;
-            }else if(count1 == 0){
-                majority1=nums[i];
-                count1=1;
-            }else{
-                count1--;
-            }
+        for(int i=1;i<nums.length;i++){
+           if(nums[i] == majorityElement){
+                cnt++;
+           }else{
+                cnt--;
+           }
+            
+           if(cnt == 0){
+               majorityElement = nums[i];
+               cnt = 1;
+           } 
         }
         
-        return majority1;
+        return majorityElement;
         
     }
 }
