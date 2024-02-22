@@ -5,22 +5,18 @@ class Solution {
             return 1;
         }
         
-        int cnt = 0;
-        int townJudge = -1;
-        
-        Map<Integer,Integer> map = new HashMap<>();
-        Set<Integer> set = new HashSet<>();
+        int[] count = new int[n+1];
         
         for(int tr[]:trust){
-            set.add(tr[0]);
-            map.put(tr[1],map.getOrDefault(tr[1],0)+1);
+            count[tr[0]] = -1;
+            if(count[tr[1]]!=-1){
+                count[tr[1]]++;
+            }
         }
         
-        
-        for(Map.Entry<Integer,Integer> entry :map.entrySet()){
-            
-            if(entry.getValue() == n-1 && !set.contains(entry.getKey())){
-                return entry.getKey();
+        for(int i=1;i<=n;i++){
+            if(count[i]==n-1){
+                return i;
             }
         }
         
