@@ -12,7 +12,7 @@ class Solution {
         }
         
         PriorityQueue<int[]> queue = new PriorityQueue<>((a,b)->{
-            return a[1]==b[1]?(a[0]-b[0]):(a[1]-b[1]);
+            return a[1]-b[1];
         });
         int visited[] = new int[n];
         queue.add(new int[]{0,0});
