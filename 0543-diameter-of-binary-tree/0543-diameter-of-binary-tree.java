@@ -1,39 +1,24 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
-**/
-    
-    
 class Solution {
-    int diameter;
     public int diameterOfBinaryTree(TreeNode root) {
-       diameter = 0;
-       length(root);
-       return diameter;    
+        int[] diameter = new int[1];
+        diameterOfBinaryTreeHelper(root, diameter);
+        return diameter[0];
     }
     
-    
-    int length(TreeNode root){
-        if(root == null){
+    private int diameterOfBinaryTreeHelper(TreeNode root, int[] diameter) {
+        if (root == null) {
+            // If root is null, depth is 0
             return 0;
         }
         
-        int left = length(root.left);
-        int right = length (root.right);
-        diameter = Math.max(diameter,left+right);
+        // Calculate the depths of left and right subtrees
+        int leftDepth = diameterOfBinaryTreeHelper(root.left, diameter);
+        int rightDepth = diameterOfBinaryTreeHelper(root.right, diameter);
         
-        return 1+ Math.max(left,right);
+        // Update the diameter if the sum of depths of left and right subtrees is greater
+        diameter[0] = Math.max(diameter[0], leftDepth + rightDepth);
+        
+        // Return the depth of the current node
+        return 1 + Math.max(leftDepth, rightDepth);
     }
-    
 }
