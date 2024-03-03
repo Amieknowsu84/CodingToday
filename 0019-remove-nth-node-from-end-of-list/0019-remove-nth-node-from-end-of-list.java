@@ -16,13 +16,13 @@ class Solution {
         
         ListNode left = head, right = head;
         int cnt = 0;
-        while(cnt++<n){
+        while(cnt++ < n){
             right = right.next;
         }
         
         //edge case when 1 or 2 elem 
         if(right == null){
-                return left.next;
+            return left.next;
         }   
             
         
