@@ -12,6 +12,7 @@ class Solution {
     
     // 1->2->3->4->5 
     
+    // gap method
     public ListNode removeNthFromEnd(ListNode head, int n) {
         
         ListNode left = head, right = head;
