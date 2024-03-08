@@ -11,9 +11,6 @@ class Solution {
                 maxCnt = 1;
             }
         }
-        //System.out.println(max+" "+maxCnt);
-        
         return maxCnt*max;
-        
     }
 }
