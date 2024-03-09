@@ -1,15 +1,18 @@
 class Trie {
     
-    Node parent;
+    private final Node parent;
+    
+    private static final int ALPHABET_SIZE = 26;
 
-    class Node{
+    static class Node{
        char character;
        Node child[];
        boolean end;
+       String word;
         
        Node(char character){
-           this.character=character;
-           this.child=new Node[26];
+           this.character = character;
+           this.child = new Node[ALPHABET_SIZE];
        } 
     }
     
@@ -25,10 +28,11 @@ class Trie {
             if(current.child[index] == null){
                 current.child[index] = new Node(character);
             }
-            current=current.child[index];
+            current = current.child[index];
         }
         
-        current.end=true;
+        current.end = true;
+        current.word = word;
     }
     
     private Node searchPrefix(String prefix) {
@@ -47,6 +51,7 @@ class Trie {
     
     public boolean search(String word) {
         Node current = searchPrefix(word);
+        
         return current!=null && current.end;
     }
     
