@@ -1,24 +1,11 @@
 class Solution {
     public int majorityElement(int[] nums) {
-  
-        int cnt=1;
-        int majorityElement = nums[0];
+       Map<Integer,Long> map = Arrays.stream(nums).boxed()
+                 .collect(Collectors.groupingBy(i->i,Collectors.counting()));
         
-        //moore algorithm
-        for(int i=1;i<nums.length;i++){
-           if(nums[i] == majorityElement){
-                cnt++;
-           }else{
-                cnt--;
-           }
-            
-           if(cnt == 0){
-               majorityElement = nums[i];
-               cnt = 1;
-           } 
-        }
+        Optional<Map.Entry<Integer, Long>> maxEntry =  map.entrySet().stream()
+                .max(Map.Entry.comparingByValue());
         
-        return majorityElement;
-        
+        return maxEntry.get().getKey();
     }
 }
