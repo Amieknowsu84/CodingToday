@@ -6,7 +6,6 @@ class Solution {
     int cnt = nums.length/2;
      
     return map.entrySet().stream().filter(entry->entry.getValue()>cnt)
-                .findAny().get().getKey();
-        
+                .findFirst().get().getKey();
     }
 }
