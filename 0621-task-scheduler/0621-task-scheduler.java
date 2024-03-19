@@ -23,32 +23,35 @@ class Solution {
             (a,b)->count[b-'A']-count[a-'A'] );
         
         for(int i=0;i<count.length;i++){
-            char c=(char)('A'+i);
-            if(count[i]!=0)
-             pq.add(c);
+            
+            if(count[i]!=0){
+                char current =(char)('A'+i);
+                pq.add(current);
+            }
+            
         }
         
-        Queue<Pair<Character,Integer>> queue=new LinkedList<>();
+        Queue<Pair<Character,Integer>> queue = new LinkedList<>();
+        int time = 0;
         
-        int time=0;
         while(!pq.isEmpty() || !queue.isEmpty()){
             time++;
             
-            if(!queue.isEmpty() && queue.peek().getValue()<=time){
+            if(!queue.isEmpty() && queue.peek().getValue() <= time){
               pq.add(queue.remove().getKey());    
             }
-           if(!pq.isEmpty()){ 
-           char character=pq.remove();
-           count[character-'A']--; 
             
-           if(count[character-'A']==0){
-               pq.remove(character);
-           }else{ 
-              Pair p=new Pair(character,time+n+1);
-              queue.add(p);    
-           }
+            if(!pq.isEmpty()){ 
+              char character = pq.remove();
+              count[character-'A']--; 
+    
+              if(count[character-'A'] == 0){
+                 pq.remove(character);
+              }else{ 
+                 Pair p=new Pair(character,time+n+1);
+                 queue.add(p);    
+              }
            }    
-            
         }
         
         return time;
