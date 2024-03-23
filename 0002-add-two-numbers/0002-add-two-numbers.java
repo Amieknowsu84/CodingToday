@@ -14,24 +14,16 @@ class Solution {
          ListNode thead = dummy;
         
          while(l1 != null || l2 != null){
-             sum = (l1 != null ? l1.val : 0) 
-                  + (l2 != null ? l2.val : 0) + carry;
-             
+             sum = (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0) + carry;
              carry = sum / 10;
-             sum = sum % 10;
-             thead.next = new ListNode(sum);
+             thead.next = new ListNode(sum % 10);
              thead = thead.next;
-             if(l1 != null){
-                 l1 = l1.next;
-             }
-             if(l2 != null){
-                 l2 = l2.next;
-             }
+             
+             if(l1 != null) l1 = l1.next;
+             if(l2 != null) l2 = l2.next;
          }
         
-        if(carry != 0 ){
-            thead.next = new ListNode(carry);
-        }
+         if(carry != 0) thead.next = new ListNode(carry);
         
         return dummy.next;  
     }
