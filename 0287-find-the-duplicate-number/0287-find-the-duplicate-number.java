@@ -1,8 +1,4 @@
 class Solution {
-    
-    // csum = sum + x
-    // sum = n*(n+1)/2
-
     public int findDuplicate(int[] nums) {
         for(int i=0;i<nums.length;i++){
             int abs = Math.abs(nums[i]);
@@ -13,7 +9,6 @@ class Solution {
                 nums[index] = -nums[index];
             }
         }
-        
         return -1;
     }
 }
