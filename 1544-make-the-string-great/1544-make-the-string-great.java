@@ -10,8 +10,12 @@ class Solution {
             }
         }
         
-      return stack.stream().map(Object::toString)
-                    .collect(Collectors.joining());
+      StringBuilder result = new StringBuilder();
+      while(!stack.isEmpty()){
+          result.append(stack.pop());
+      }
+        
+      return result.reverse().toString();  
     }
     
     boolean check(char a,char b){
