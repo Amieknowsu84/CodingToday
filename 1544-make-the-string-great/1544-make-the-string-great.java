@@ -3,9 +3,7 @@ class Solution {
     public String makeGood(String s) {
         Stack<Character> stack = new Stack<>();
         for(int i=0; i< s.length();i++){
-            if(stack.isEmpty()){
-                stack.add(s.charAt(i));
-            }else if(check(stack.peek(),s.charAt(i))){
+            if(!stack.isEmpty() && check(stack.peek(),s.charAt(i))){
                 stack.pop();
             }else{
                 stack.add(s.charAt(i));
