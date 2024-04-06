@@ -1,5 +1,5 @@
 class Solution {
-    static long trapWater(int[] heights){
+    static int trapWater(int[] heights){
         int[] left = new int[heights.length];
         int[] right = new int[heights.length];
         int area = 0;
@@ -11,7 +11,6 @@ class Solution {
             int li = left[i];
             int ri = right[i];
             int heightOfWaterIthBuilding = Math.min(li,ri) - heights[i];
-            //System.out.println(li+" "+ri+" "+heightOfWaterIthBuilding+" "+heights[i]);
             if(heightOfWaterIthBuilding > 0)
              area += heightOfWaterIthBuilding;
         }
@@ -43,6 +42,6 @@ class Solution {
 
 
     public int trap(int[] height) {
-       return (int)trapWater(height);
+       return trapWater(height);
     }
 }
