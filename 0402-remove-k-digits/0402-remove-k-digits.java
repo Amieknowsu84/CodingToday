@@ -1,31 +1,28 @@
 class Solution {
     public String removeKdigits(String num, int k) {
-        Stack<Character> st = new Stack<>();
+       Deque<Character> deque = new LinkedList<>();
         
-        for(int i=0; i<num.length(); i++){
-            while(!st.isEmpty() && st.peek() > num.charAt(i) && k>0){
-                st.pop();
+        for(int i = 0; i < num.length(); i++) {
+            while(!deque.isEmpty() && deque.peekLast() > num.charAt(i) && k > 0) {
+                deque.removeLast();
                 k--;
             }
-            st.add(num.charAt(i));
+            deque.addLast(num.charAt(i));
         }
         
-        while(k>0){
-            st.pop();
+        while(k > 0) {
+            deque.removeLast();
             k--;            
         }
         
-        
         StringBuilder res = new StringBuilder();
         boolean startZero = true;
-        LinkedList<Character> list = new LinkedList<>(st);
-        //System.out.println(list);
         
-        while(!list.isEmpty()){
-            char elem = list.removeFirst();
-            if(startZero && elem == '0'){
-              continue;   
-            }else{
+        while(!deque.isEmpty()) {
+            char elem = deque.removeFirst();
+            if(startZero && elem == '0') {
+                continue;   
+            } else {
                 startZero = false;
                 res.append(elem);
             }
