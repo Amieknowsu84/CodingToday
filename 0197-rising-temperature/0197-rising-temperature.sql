@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select w1.id from weather w1 left outer join weather w2 on w2.recordDate = DATE_SUB(w1.recordDate, INTERVAL 1 DAY) and w1.temperature > w2.temperature where w2.temperature is not null;
