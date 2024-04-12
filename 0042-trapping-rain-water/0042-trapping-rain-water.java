@@ -1,47 +1,30 @@
 class Solution {
-    static int trapWater(int[] heights){
-        int[] left = new int[heights.length];
-        int[] right = new int[heights.length];
-        int area = 0;
+    public int trap(int[] height) {
+        int n = height.length;
+        if (n == 0) return 0;
 
-        fillLeft(left, heights);
-        fillRight(right, heights);
-
-        for (int i = 0; i < heights.length; i++) {
-            int li = left[i];
-            int ri = right[i];
-            int heightOfWaterIthBuilding = Math.min(li,ri) - heights[i];
-            if(heightOfWaterIthBuilding > 0)
-             area += heightOfWaterIthBuilding;
+        int[] leftMax = new int[n];
+        int[] rightMax = new int[n];
+        
+        // Pre-compute the maximum height to the left of each building
+        leftMax[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
         }
         
-        return area; 
-    } 
-    
-      static void fillLeft(int[] left,int heights[]){
-        int result = heights[0];
-        for(int i=0;i<left.length;i++){
-            left[i] = result;
-            result = Math.max(result,heights[i]);
+        // Pre-compute the maximum height to the right of each building
+        rightMax[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
         }
-    }
-     
- //     0 1 2 3 4 5 6 7 8 9 10 11
-//    [0,1,0,2,1,0,1,3,2,1,2, 1]
- //   -1-1 1-1 3 4 3-1 7 8 7  10
-//     1 3 3 7 7 6 7 12 12 10 12 12
-           
-    
-    static void fillRight(int[] right,int[] heights){
-        int result = heights[heights.length-1];
-        for(int i=right.length-1; i>=0; i--){
-           right[i] = result;  
-           result = Math.max(result,heights[i]); 
+        
+        // Calculate trapped water
+        int totalWater = 0;
+        for (int i = 0; i < n; i++) {
+            int minHeight = Math.min(leftMax[i], rightMax[i]);
+            totalWater += Math.max(minHeight - height[i], 0);
         }
-    }
-
-
-    public int trap(int[] height) {
-       return trapWater(height);
+        
+        return totalWater;
     }
 }
