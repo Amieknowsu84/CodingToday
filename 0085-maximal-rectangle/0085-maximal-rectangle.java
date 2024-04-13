@@ -30,7 +30,7 @@ class Solution {
             max = Math.max(max,findMaxArea(curr)); 
             //Arrays.stream(curr).forEach(element -> System.out.print(element+" "));
              
-            System.out.println(max);
+           // System.out.println(max);
          }
          
          return max;
