@@ -15,7 +15,6 @@ class Solution {
                 break;
         }
         
-    
         return islandPerimeter(si,sj,grid);
     
     }
@@ -38,27 +37,5 @@ class Solution {
          return islandPerimeter(i+1,j,grid) +  islandPerimeter(i-1,j,grid)
             +  islandPerimeter(i,j-1,grid) +  islandPerimeter(i,j+1,grid);
         
-    }
-    
-    int getCnt(int i,int j,int[][] grid){
-        int cnt = 0;
-    
-        if(i-1 < 0 || grid[i-1][j] == 0){
-            cnt+=1;
-        }
-        
-        if(j-1 < 0 || grid[i][j-1] == 0){
-            cnt+=1;
-        }
-        
-        if(i+1 >= grid.length || grid[i+1][j] == 0){
-            cnt+=1;
-        }
-        
-        if(j+1 >= grid[0].length || grid[i][j+1] == 0){
-            cnt+=1;
-        }
-         //System.out.println(i+" "+j+" "+cnt);
-        return cnt;
     }
 }
