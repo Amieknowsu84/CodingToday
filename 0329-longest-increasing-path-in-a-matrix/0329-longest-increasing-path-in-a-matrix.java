@@ -4,50 +4,60 @@ class Solution {
     int n;
     
     public int longestIncreasingPath(int[][] matrix) {
-       m=matrix.length;
-       n=matrix[0].length;
-       int[][] dp=new int[m][n];
-       for(int row[]:dp){
-          Arrays.fill(row,-1);
-       }
+        m = matrix.length;
+        n = matrix[0].length;
+        int[][] dp = new int[m][n];
         
-      int max=0;
-       for(int i=0;i<matrix.length;i++){
-           for(int j=0;j<matrix[0].length;j++){
-               max=Math.max(dfs(matrix,dp,i,j),max);
-           }
-       }
+        // Initialize dp array with -1
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
         
-       return max; 
+        int max = 0;
+        
+        // Traverse each cell in the matrix
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                max = Math.max(max, dfs(matrix, dp, i, j));
+            }
+        }
+        
+        return max; 
     }
     
-    
-    int dfs(int[][] matrix,int[][] dp,int i,int j){
-         
-        if(!inBoundaries(i,j)){
+    // Depth First Search with memoization
+    int dfs(int[][] matrix, int[][] dp, int i, int j) {
+        // If the cell is out of boundaries, return 0
+        if (!inBoundaries(i, j)) {
             return 0;
         }
         
-        if(dp[i][j]!=-1){
+        // If the value is already calculated, return it from dp array
+        if (dp[i][j] != -1) {
             return dp[i][j];
         }
+        
+        int[] row = {0, 1, 0, -1};
+        int[] col = {1, 0, -1, 0};
+        int max = 0;
+        
+        // Check each neighbor
+        for (int k = 0; k < row.length; k++) {
+            int ni = i + row[k];
+            int nj = j + col[k];
             
-        int row[]={1,0,0,-1};
-        int col[]={0,1,-1,0};
-        int max=0;
-        for(int k=0;k<row.length;k++){
-            int ni=i+row[k];
-            int nj=j+col[k];
-           if(inBoundaries(ni,nj) && matrix[i][j]<matrix[ni][nj] ){
-               max=Math.max(max,dfs(matrix,dp,ni,nj));
-           }
+            // If the neighbor is within boundaries and has a greater value
+            if (inBoundaries(ni, nj) && matrix[i][j] < matrix[ni][nj]) {
+                max = Math.max(max, dfs(matrix, dp, ni, nj));
+            }
         }
         
-        return dp[i][j]=1+max;
-        
+        // Update dp array and return the longest increasing path length
+        return dp[i][j] = 1 + max;
     }
     
-    boolean inBoundaries(int i, int j){
-        return (i>=0 && i<m && j>=0 && j<n);
+    // Helper function to check if a cell is within boundaries
+    boolean inBoundaries(int i, int j) {
+        return (i >= 0 && i < m && j >= 0 && j < n);
     }
 }
