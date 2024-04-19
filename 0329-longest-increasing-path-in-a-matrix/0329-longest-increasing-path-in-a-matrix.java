@@ -6,12 +6,7 @@ class Solution {
     public int longestIncreasingPath(int[][] matrix) {
         m = matrix.length;
         n = matrix[0].length;
-        int[][] dp = new int[m][n];
-        
-        // Initialize dp array with -1
-        for (int[] row : dp) {
-            Arrays.fill(row, -1);
-        }
+        Integer[][] dp = new Integer[m][n];
         
         int max = 0;
         
@@ -26,14 +21,14 @@ class Solution {
     }
     
     // Depth First Search with memoization
-    int dfs(int[][] matrix, int[][] dp, int i, int j) {
+    int dfs(int[][] matrix, Integer[][] dp, int i, int j) {
         // If the cell is out of boundaries, return 0
         if (!inBoundaries(i, j)) {
             return 0;
         }
         
         // If the value is already calculated, return it from dp array
-        if (dp[i][j] != -1) {
+        if (dp[i][j] != null) {
             return dp[i][j];
         }
         
