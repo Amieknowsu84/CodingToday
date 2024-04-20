@@ -5,6 +5,8 @@ class Solution {
     int c2;
     int max;
     int min;
+    int[] dx = {0,1,0,-1};
+    int[] dy = {1,0,-1,0};
     
     public int[][] findFarmland(int[][] land) {
         ArrayList<int[]> list = new ArrayList<>();
@@ -14,7 +16,6 @@ class Solution {
                 if(land[i][j] == 1){
                     max = Integer.MIN_VALUE;
                     min = Integer.MAX_VALUE;
-                    //System.out.println(i+" "+j+" ");
                     dfs(i,j,land);
                     list.add(new int[]{r1,c1,r2,c2});
                 }
@@ -40,12 +41,8 @@ class Solution {
         if(land[i][j]  == 0 || land[i][j] == 2){
             return;
         }
-        
-        int[] dx = {0,1,0,-1};
-        int[] dy = {1,0,-1,0};
-        
+         
         land[i][j] = 2;
-        //System.out.println(i+" "+j+" "+max+" "+min);
         if(i+j<min){
             r1 = i;
             c1 = j;
