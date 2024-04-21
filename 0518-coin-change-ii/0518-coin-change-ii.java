@@ -8,9 +8,6 @@ class Solution {
     }
     
     int solve(int index,int target,int coins[]){
-        if(target <0){
-            return 0;
-        }
         if(target==0){
             return 1;
         }
@@ -22,7 +19,8 @@ class Solution {
         }
     
         return dp[index][target]=
-            solve(index,target-coins[index],coins)+
+            ((target>=coins[index])?solve(index,target-coins[index],coins):0)
+            +
             solve(index+1,target,coins);
     }
 }
