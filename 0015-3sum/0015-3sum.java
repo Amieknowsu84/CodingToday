@@ -29,10 +29,6 @@ class Solution {
                     j++;
                     continue;
                 }
-                if(k != nums.length-1 && nums[k] == nums[k+1]){
-                    k--;
-                    continue;
-                }
                 
                 int sum = nums[i] + nums[j] + nums[k];
                 
