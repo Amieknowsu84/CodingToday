@@ -5,7 +5,7 @@ class Solution {
         int max = 0;
         
         // Traverse the string in reverse order
-        for (int i = s.length() - 1; i >= 0; i--) {
+        for (int i = 0; i < s.length(); i++) {
             // Convert character to index
             int current = s.charAt(i) - 'a';
             int localMax = 0;
