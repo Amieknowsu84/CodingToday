@@ -1,6 +1,10 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         
+        HashSet<String> words = new HashSet<>(wordList);
+        if(!words.contains(endWord))
+            return 0;
+        
         Queue<String> queue = new LinkedList<>();
         queue.add(beginWord);
         
@@ -15,16 +19,20 @@ class Solution {
             
             for(int i=0;i < size; i++){
               String current = queue.remove();
+                
               if(current.equals(endWord)){
                 return level;
               }
-              for(String word: wordList){
+                
+              for(String word: words){
                   if(!visited.contains(word) && isNextDistance(current,word)){
                      queue.add(word);
                      visited.add(word);
                  }
               } 
             }
+            
+            words.removeAll(visited);
             
             level++;
         }
@@ -35,17 +43,15 @@ class Solution {
     
     boolean isNextDistance(String a,String b){
         int cnt = 0;
-        
         for(int i=0; i < a.length(); i++){
             if(a.charAt(i) != b.charAt(i)){
                 cnt++;
             }
-            
             if(cnt > 1){
                 return false;
             }
         }
-        
         return cnt!=0;
     }
+    
 }
