@@ -31,11 +31,11 @@ class Solution {
                         if(!visited.contains(newWord) && words.contains(newWord)){
                             visited.add(newWord);
                             queue.add(newWord);
+                            words.remove(current);
                         }
                     }
                     currentChar[j] = atIndex;
                 }
-                words.remove(current);
 
             }
             level++;
