@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
@@ -31,8 +29,10 @@ class Solution {
                     if (!visited.contains(nextWord) && wordSet.contains(nextWord)) {
                         visited.add(nextWord);
                         queue.add(nextWord);
+                        wordSet.remove(nextWord);
                     }
                 }
+                
             }
             level++;
         }
@@ -44,6 +44,7 @@ class Solution {
     private List<String> generateNextWords(String word) {
         List<String> nextWords = new ArrayList<>();
         char[] charArray = word.toCharArray();
+        
         for (int i = 0; i < charArray.length; i++) {
             char originalChar = charArray[i];
             for (char c = 'a'; c <= 'z'; c++) {
@@ -54,6 +55,7 @@ class Solution {
             }
             charArray[i] = originalChar; // Restore the original character
         }
+        
         return nextWords;
     }
 }
