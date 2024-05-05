@@ -35,6 +35,7 @@ class Solution {
                     }
                     currentChar[j] = atIndex;
                 }
+                words.remove(current);
 
             }
             level++;
