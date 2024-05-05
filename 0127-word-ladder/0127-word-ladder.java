@@ -30,9 +30,11 @@ class Solution {
                      visited.add(word);
                  }
               } 
+                
+              words.removeAll(visited);  
             }
             
-            words.removeAll(visited);
+            
             
             level++;
         }
