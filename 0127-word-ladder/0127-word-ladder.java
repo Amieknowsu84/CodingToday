@@ -19,6 +19,7 @@ class Solution {
             
             for(int i=0;i < size; i++){
               String current = queue.remove();
+              words.remove(current);  
                 
               if(current.equals(endWord)){
                 return level;
@@ -30,12 +31,8 @@ class Solution {
                      visited.add(word);
                  }
               } 
-                
-              words.removeAll(visited);  
-            }
-            
-            
-            
+                 
+            } 
             level++;
         }
         
