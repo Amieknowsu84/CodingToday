@@ -1,56 +1,45 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        
-        HashSet<String> words = new HashSet<>(wordList);
-        if(!words.contains(endWord))
+        Set<String> words = new HashSet<>(wordList);
+        if (!words.contains(endWord))
             return 0;
-        
+
         Queue<String> queue = new LinkedList<>();
         queue.add(beginWord);
-        
-        HashSet<String> visited = new HashSet<>();
+
+        Set<String> visited = new HashSet<>();
         visited.add(beginWord);
-        
+
         int level = 1;
-        
-        while(!queue.isEmpty()){
-            
+
+        while (!queue.isEmpty()) {
             int size = queue.size();
-            
-            for(int i=0;i < size; i++){
-              String current = queue.remove();
-              words.remove(current);  
+
+            for (int i = 0; i < size; i++) {
+                String current = queue.remove();
+
+                if (current.equals(endWord))
+                    return level;
                 
-              if(current.equals(endWord)){
-                return level;
-              }
+                char[] currentChar = current.toCharArray();
                 
-              for(String word: words){
-                  if(!visited.contains(word) && isNextDistance(current,word)){
-                     queue.add(word);
-                     visited.add(word);
-                 }
-              } 
-                 
-            } 
+                for(int j = 0; j < current.length(); j++){
+                    char atIndex = currentChar[j];
+                    for(char c = 'a'; c <= 'z'; c++){
+                        currentChar[j] = c;
+                        String newWord = new String(currentChar);
+                        if(!visited.contains(newWord) && words.contains(newWord)){
+                            visited.add(newWord);
+                            queue.add(newWord);
+                        }
+                    }
+                    currentChar[j] = atIndex;
+                }
+
+            }
             level++;
         }
-        
+
         return 0;
     }
-    
-    
-    boolean isNextDistance(String a,String b){
-        int cnt = 0;
-        for(int i=0; i < a.length(); i++){
-            if(a.charAt(i) != b.charAt(i)){
-                cnt++;
-            }
-            if(cnt > 1){
-                return false;
-            }
-        }
-        return cnt!=0;
-    }
-    
 }
