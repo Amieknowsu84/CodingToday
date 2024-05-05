@@ -1,12 +1,6 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         
-        
-        boolean contains = wordList.stream().filter(word->word.equals(endWord)).findAny().isPresent();
-        
-        if(!contains)
-            return 0;
-        
         Queue<String> queue = new LinkedList<>();
         queue.add(beginWord);
         
