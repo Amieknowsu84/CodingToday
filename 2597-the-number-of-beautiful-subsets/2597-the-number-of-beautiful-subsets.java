@@ -5,7 +5,6 @@ class Solution {
     
     int beautifulSubsets(int[] nums, int k, int index,Map<Integer,Integer> map) {
         if(index < 0){
-            //System.out.println();
             if(!map.isEmpty()){
                 return 1;
             }else{
@@ -17,13 +16,13 @@ class Solution {
         int notTake = 0;
         int val = 0;
         if(!map.containsKey(nums[index] - k) && !map.containsKey(k + nums[index])){
-            //System.out.print(nums[index] +" ");
             map.put(nums[index],map.getOrDefault(nums[index],0)+1);
+            
             take = beautifulSubsets(nums,k,index-1,map);
+            
             if(map.get(nums[index]) == 1){
               map.remove(nums[index]);
-            }
-            else{
+            }else{
                map.put(nums[index],map.getOrDefault(nums[index],0)-1);  
             }
         }
