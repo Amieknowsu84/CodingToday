@@ -14,7 +14,7 @@ class Solution {
         
         int take = 0;
         int notTake = 0;
-        int val = 0;
+    
         if(!map.containsKey(nums[index] - k) && !map.containsKey(k + nums[index])){
             map.put(nums[index],map.getOrDefault(nums[index],0)+1);
             
