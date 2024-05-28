@@ -6,13 +6,12 @@ class Solution {
         
         while(j < s.length()){
             cost = Math.abs(s.charAt(j)-t.charAt(j));
-            //System.out.println(i+" "+j+" "+totalCost);
-            if(totalCost + cost <= maxCost){
-                totalCost += cost; 
+            if(maxCost - cost >= 0){
+                maxCost -= cost; 
                 len = Math.max(len,j-i+1);
                 j++;
             }else{
-                 totalCost-=(Math.abs(s.charAt(i)-t.charAt(i)));
+                 maxCost += (Math.abs(s.charAt(i)-t.charAt(i)));
                  i++;
             }
         }
