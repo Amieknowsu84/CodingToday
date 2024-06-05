@@ -20,9 +20,10 @@ class Solution {
         List<String> result = new ArrayList<>();
         
         for(int i=0;i<26;i++){
-          char ch = (char)(i+'a');
+          String ch = (char)(i+'a')+"";
+            
           for(int j=0; j<orignalSet[i]; j++){
-             result.add(ch+"");
+             result.add(ch);
           }
         }
        
