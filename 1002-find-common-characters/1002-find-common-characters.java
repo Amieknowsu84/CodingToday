@@ -2,7 +2,7 @@ class Solution {
     public List<String> commonChars(String[] words) {
        
         int[] orignalSet = new int[26];
-        boolean firstWord = true;
+        Arrays.fill(orignalSet, Integer.MAX_VALUE);
         
         for(String word: words){
            
@@ -10,17 +10,11 @@ class Solution {
            for(int i = 0; i < word.length(); i++){
                set[word.charAt(i)-'a']++;
            }
-            
-           
+        
            for(int i=0;i<26;i++){
-               if(firstWord){
-                   orignalSet[i] =  set[i];
-               }else{
-                  orignalSet[i]= Math.min( orignalSet[i], set[i]); 
-               }
+              orignalSet[i]= Math.min( orignalSet[i], set[i]); 
            }
            
-          firstWord = false;
         }
         
         List<String> result = new ArrayList<>();
