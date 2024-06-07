@@ -55,18 +55,22 @@ class Solution {
         StringBuilder result = new StringBuilder();
         Trie trie = new Trie();
         String space = " ";
+        
         for(String word: dictionary){
             trie.insert(word);
         }
         
         String[] words = sentence.split(" ");
-        for(String word: words){
+        
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
             String newWord = trie.findShortestMatch(word);
-            if(newWord.equals("")){
-               newWord = word;
+            if (newWord.isEmpty()) {
+                newWord = word;
             }
-            boolean isFirstWord = result.length() == 0;
-            newWord = isFirstWord ? newWord : space+newWord;
+            if (i > 0) {
+                result.append(space);
+            }
             result.append(newWord);
         }
         
