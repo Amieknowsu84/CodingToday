@@ -29,32 +29,22 @@ class Trie{
     
     String findShortestMatch(String word){
         StringBuilder result = new StringBuilder();
-        
-        if(word == null || word.equals("")){
-            return result.toString();
-        }
-        
         TrieNode current = root;
-        
-        for(Character ch: word.toCharArray()){
-            int index = ch-'a';
-            if(current.siblings[index]!=null){
+
+        for (char ch : word.toCharArray()) {
+            int index = ch - 'a';
+            if (current.siblings[index] != null) {
                 result.append(ch);
-                if(current.siblings[index].end){
+                current = current.siblings[index];
+                if (current.end) {
                     return result.toString();
                 }
-                current = current.siblings[index];
-            }else{
-                return current.end ? result.toString(): "";
+            } else {
+                break;
             }
         }
         
-        if(current.end){
-            result.append(current.ch);
-            return result.toString();
-        }else{
-            return "";
-        }
+        return current.end ? result.toString() : "";
     }
 }
 
@@ -64,20 +54,19 @@ class Solution {
     public String replaceWords(List<String> dictionary, String sentence) {
         StringBuilder result = new StringBuilder();
         Trie trie = new Trie();
-        
+        String space = " ";
         for(String word: dictionary){
             trie.insert(word);
         }
         
-        
         String[] words = sentence.split(" ");
         for(String word: words){
             String newWord = trie.findShortestMatch(word);
-            //System.out.println(" -- "+newWord);
             if(newWord.equals("")){
                newWord = word;
             }
-            newWord = result.length() == 0 ? newWord : " "+newWord;
+            boolean isFirstWord = result.length() == 0;
+            newWord = isFirstWord ? newWord : space+newWord;
             result.append(newWord);
         }
         
