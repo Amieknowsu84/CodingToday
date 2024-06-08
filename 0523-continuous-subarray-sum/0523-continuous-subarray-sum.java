@@ -10,11 +10,6 @@ class Solution {
             sum += nums[i];
             int remainder = (int) (sum % k);
             
-            // Handling negative remainders to ensure correct modulus operation
-            if (remainder < 0) {
-                remainder += k;
-            }
-            
             if (remainderMap.containsKey(remainder)) {
                 int prevIndex = remainderMap.get(remainder);
                 // Check if the subarray length is at least 2
