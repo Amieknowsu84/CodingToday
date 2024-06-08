@@ -1,25 +1,30 @@
 class Solution {
     public boolean checkSubarraySum(int[] nums, int k) {
-       //[23,2,4,6,7]
-       Map<Integer,Integer> map = new HashMap<>();
-       map.put(0,-1);
+        // Map to store the remainder and the corresponding index
+        Map<Integer, Integer> remainderMap = new HashMap<>();
+        remainderMap.put(0, -1);  // To handle the case when the subarray starts from index 0
         
-       long sum = 0;
+        long sum = 0;
         
-       for(int i=0;i<nums.length;i++){
-          sum += nums[i];
-          int remainder = (int)(sum % k); 
-          if(map.containsKey(remainder)){
-              int index = map.get(remainder);
-              if(i - index >= 2){
-                 return true; 
-              }
-          }else{
-              map.put(remainder,i);
-          }
-       }
-        
-       return false; 
-        
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            int remainder = (int) (sum % k);
+            
+            // Handling negative remainders to ensure correct modulus operation
+            if (remainder < 0) {
+                remainder += k;
+            }
+            
+            if (remainderMap.containsKey(remainder)) {
+                int prevIndex = remainderMap.get(remainder);
+                // Check if the subarray length is at least 2
+                if (i - prevIndex >= 2) {
+                    return true;
+                }
+            } else {
+                remainderMap.put(remainder, i);
+            }
+        }
+        return false;
     }
 }
