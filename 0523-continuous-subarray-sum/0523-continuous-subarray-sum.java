@@ -12,7 +12,7 @@ class Solution {
           if(map.containsKey(remainder)){
               int index = map.get(remainder);
               if(i - index >= 2){
-                 System.out.println(i+" "+index); 
+                // System.out.println(i+" "+index); 
                  return true; 
               }
           }else{
