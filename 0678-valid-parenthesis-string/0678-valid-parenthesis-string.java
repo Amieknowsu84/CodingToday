@@ -25,11 +25,9 @@ class Solution {
             isValid |= isValidString(s, dp, currIndex + 1, count + 1); 
             isValid |= isValidString(s, dp, currIndex + 1, count); 
             isValid |= isValidString(s, dp, currIndex + 1, count - 1); 
-        }
-        if (c == '(') {
+        }else if (c == '(') {
             isValid = isValidString(s, dp, currIndex + 1, count + 1);
-        }
-        if (c == ')') {
+        }else if (c == ')') {
             isValid = isValidString(s, dp, currIndex + 1, count - 1);
         }
 
