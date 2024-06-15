@@ -1,39 +1,39 @@
 class Solution {
      public boolean checkValidString(String s) {
         int n = s.length();
-        Stack<Integer> openBracket = new Stack<>();
-        Stack<Integer> astrikStack = new Stack<>(); 
+        int openCount = 0;
+        int closeCount = 0;
          
         // "(((*))"
          
         for(int i=0; i < n; i++){
-            if(s.charAt(i) == '('){
-                openBracket.push(i);
-            }else if(s.charAt(i) == ')'){
-                 if(!openBracket.isEmpty()){
-                     openBracket.pop();
-                 }else if(!astrikStack.isEmpty()){
-                     astrikStack.pop();
-                 }else{
-                     return false;
-                 }
-            }else{
-                astrikStack.push(i);
-            }
+           if(s.charAt(i) == ')'){
+               openCount--;
+           }else{
+               openCount++;
+           }
+            
+           if(openCount < 0){
+               return false;
+           } 
+            
+        }
+         
+         for(int i=n-1; i >= 0; i--){
+           if(s.charAt(i) == '('){
+               closeCount--;
+           }else{
+               closeCount++;
+           }
+            
+           if(closeCount < 0){
+               return false;
+           } 
+            
         }
          
          
-         
-        while(!openBracket.isEmpty() && !astrikStack.isEmpty()){
-            //System.out.println(astrikStack.peek()+" "+openBracket.peek());
-            if(astrikStack.peek() < openBracket.peek()){
-                return false;
-            }
-            astrikStack.pop();
-            openBracket.pop();
-        }
-         
-        return openBracket.isEmpty(); 
+        return true; 
          
     }
 }
