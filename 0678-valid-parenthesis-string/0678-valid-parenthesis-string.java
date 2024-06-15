@@ -1,43 +1,39 @@
 class Solution {
      public boolean checkValidString(String s) {
         int n = s.length();
-        int[][] dp = new int[n][n];
-        for (int[] row : dp) {
-            Arrays.fill(row, -1);
+        Stack<Integer> openBracket = new Stack<>();
+        Stack<Integer> astrikStack = new Stack<>(); 
+         
+        // "(((*))"
+         
+        for(int i=0; i < n; i++){
+            if(s.charAt(i) == '('){
+                openBracket.push(i);
+            }else if(s.charAt(i) == ')'){
+                 if(!openBracket.isEmpty()){
+                     openBracket.pop();
+                 }else if(!astrikStack.isEmpty()){
+                     astrikStack.pop();
+                 }else{
+                     return false;
+                 }
+            }else{
+                astrikStack.push(i);
+            }
         }
-        return isValidString(s, dp, 0, 0);
+         
+         
+         
+        while(!openBracket.isEmpty() && !astrikStack.isEmpty()){
+            //System.out.println(astrikStack.peek()+" "+openBracket.peek());
+            if(astrikStack.peek() < openBracket.peek()){
+                return false;
+            }
+            astrikStack.pop();
+            openBracket.pop();
+        }
+         
+        return openBracket.isEmpty(); 
+         
     }
-
-    private boolean isValidString(String s, int[][] dp, int currIndex, int count) {
-        // at any point of time if closing bracket is more that opening bracket 
-        // it can not be balanced further so for sure c
-        if (count < 0) {
-            return false;
-        }
-        if (currIndex == s.length()) {
-            return count == 0;
-        }
-        if (dp[currIndex][count] != -1) {
-            return dp[currIndex][count] == 1;
-        }
-
-        boolean isValid = false;
-        char c = s.charAt(currIndex);
-        if (c == '*') {
-             // Check for all three possibilities for '*'
-            isValid = isValidString(s, dp, currIndex + 1, count + 1) ||
-                      isValidString(s, dp, currIndex + 1, count) ||
-                      isValidString(s, dp, currIndex + 1, count - 1); 
-        }else if (c == '(') {
-            // Increase balance for '('
-            isValid = isValidString(s, dp, currIndex + 1, count + 1);
-        }else if (c == ')') {
-            // Decrease balance for ')'
-            isValid = isValidString(s, dp, currIndex + 1, count - 1);
-        }
-
-        dp[currIndex][count] = isValid ? 1 : 0;
-        return isValid;
-    }
-    
 }
