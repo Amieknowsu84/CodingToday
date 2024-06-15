@@ -9,6 +9,8 @@ class Solution {
     }
 
     private boolean isValidString(String s, int[][] dp, int currIndex, int count) {
+        // at any point of time if closing bracket is more that opening bracket 
+        // it can not be balanced further so for sure c
         if (count < 0) {
             return false;
         }
@@ -22,12 +24,15 @@ class Solution {
         boolean isValid = false;
         char c = s.charAt(currIndex);
         if (c == '*') {
-            isValid |= isValidString(s, dp, currIndex + 1, count + 1); 
-            isValid |= isValidString(s, dp, currIndex + 1, count); 
-            isValid |= isValidString(s, dp, currIndex + 1, count - 1); 
+             // Check for all three possibilities for '*'
+            isValid = isValidString(s, dp, currIndex + 1, count + 1) ||
+                      isValidString(s, dp, currIndex + 1, count) ||
+                      isValidString(s, dp, currIndex + 1, count - 1); 
         }else if (c == '(') {
+            // Increase balance for '('
             isValid = isValidString(s, dp, currIndex + 1, count + 1);
         }else if (c == ')') {
+            // Decrease balance for ')'
             isValid = isValidString(s, dp, currIndex + 1, count - 1);
         }
 
