@@ -19,7 +19,7 @@ Solve for x and you should get (p[n - 1] - p[0]) / (m - 1)
     public int maxDistance(int[] position, int m) {
         Arrays.sort(position);
         int low = 1;
-        int high = (position[position.length-1]-position[0])/(m-1);
+        int high = (position[position.length-1]-position[0]);
         
         int ans = -1;
         
