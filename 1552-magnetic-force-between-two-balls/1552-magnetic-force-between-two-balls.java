@@ -1,4 +1,21 @@
 class Solution {
+    /*
+
+A better maxForce value would be (p[n - 1] - p[0]) / (m - 1)
+
+Let's say p[0]  is the first element in the array and x is the maxForce. Ideally maxForce should have been the common difference of an arithmetic progression ending at the last element of the sorted array. 
+
+So assuming you included p[0] you need (m - 1) more values to make m baskets in total. 
+
+The AP would look like p[0], p[0] + x, p[0] + 2x... p[0] + (m - 1)x
+
+To make the best use of the whole array.. the last element of the series should be the last number in the array.. 
+p[0] + (m - 1)x = p[n - 1]
+
+Solve for x and you should get (p[n - 1] - p[0]) / (m - 1)
+    */
+    
+    
     public int maxDistance(int[] position, int m) {
         Arrays.sort(position);
         int low = 1;
