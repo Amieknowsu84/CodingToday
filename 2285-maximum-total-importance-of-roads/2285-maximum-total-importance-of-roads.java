@@ -2,24 +2,24 @@ class Solution {
     public long maximumImportance(int n, int[][] roads) {
         int[] connections = new int[n];
         
-        for(int[] edge: roads){
+        // Count the connections for each city
+        for (int[] edge : roads) {
             connections[edge[0]]++;
             connections[edge[1]]++;
         }
         
-        PriorityQueue<Integer> pq = new PriorityQueue((a,b)->connections[(int)b]-connections[(int)a]);
-        for(int i=0;i<n;i++){
-          pq.add(i);   
+        // Sort the cities based on the number of connections in descending order
+        Integer[] indices = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            indices[i] = i;
         }
+        Arrays.sort(indices, (a, b) -> connections[b] - connections[a]);
         
-        long val = n;
+        // Calculate the maximum importance
         long sum = 0;
-        while(!pq.isEmpty()){
-            int node = pq.remove();
-            //System.out.println(connections[node]);
-            sum+= connections[node]*val;
-            val--;
-        } 
+        for (int i = 0; i < n; i++) {
+            sum += (long) connections[indices[i]] * (n - i);
+        }
         
         return sum;
     }
