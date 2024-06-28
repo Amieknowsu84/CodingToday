@@ -12,12 +12,12 @@ class Solution {
           pq.add(i);   
         }
         
-        int val = n;
+        long val = n;
         long sum = 0;
         while(!pq.isEmpty()){
             int node = pq.remove();
             //System.out.println(connections[node]);
-            sum+= (long)connections[node]*val;
+            sum+= connections[node]*val;
             val--;
         } 
         
