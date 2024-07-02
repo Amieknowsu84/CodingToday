@@ -18,14 +18,7 @@ class Solution {
             }
         }
         
-        int[] res = new int[result.size()];
-        int index = 0;
-        
-        for(int elem: result){
-            res[index++]=elem;
-        }
-        
-        return res;
+        return result.stream().mapToInt(Integer::intValue).toArray();
         
     }
 }
