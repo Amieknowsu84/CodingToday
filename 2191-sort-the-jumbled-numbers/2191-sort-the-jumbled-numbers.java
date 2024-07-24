@@ -1,42 +1,34 @@
 class Solution {
-    public int[] sortJumbled(int[] mapping, int[] nums) {
-        Map<Integer,Integer> map = new HashMap<>();
-        Map<Integer,Integer> indexMap = new HashMap<>();
-        Integer[] nums1 = new Integer[nums.length];
-        int index = 0;
-        for(int elem: nums){
-            map.put(elem,convert(elem, mapping));
-            //System.out.println(elem+" "+map.get(elem));
-            indexMap.put(elem,index);
-            nums1[index++] = elem;
+   public int[] sortJumbled(int[] mapping, int[] nums) {
+        int n = nums.length;
+        List<int[]> convertedNums = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            convertedNums.add(new int[]{convert(nums[i], mapping), nums[i]});
         }
-        
-        Arrays.sort(nums1,(a,b)->{
-            int val = map.get(a)-map.get(b);
-            if(val == 0){
-                return indexMap.get(a)-indexMap.get(b);
-            }else{
-                return val;
-            }
-        });
-        
-        for(int i=0;i<nums1.length;i++){
-            nums[i] = nums1[i];
+
+        Collections.sort(convertedNums, (a, b) -> a[0] == b[0] ? 0 : a[0] - b[0]);
+
+        for (int i = 0; i < n; i++) {
+            nums[i] = convertedNums.get(i)[1];
         }
 
         return nums;
     }
     
-    int convert(int num, int[] data){
+    int convert(int num, int[] mapping) {
+        if (num == 0) {
+            return mapping[0];
+        }
+
         int newNum = 0;
+        int place = 1;
         
-        int numLength = (num+"").length();
-        int i = 0;
-        while(numLength > 0){
-            int current = num % 10;
-            newNum = ((int)Math.pow(10,i++) * data[current]) + newNum;
-            num = num / 10;
-            numLength--;
+        while (num > 0) {
+            int digit = num % 10;
+            newNum = mapping[digit] * place + newNum;
+            place *= 10;
+            num /= 10;
         }
         
         return newNum;
