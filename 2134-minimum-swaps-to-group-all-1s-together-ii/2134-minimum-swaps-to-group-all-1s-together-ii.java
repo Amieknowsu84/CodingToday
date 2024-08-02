@@ -1,7 +1,8 @@
 class Solution {
     public int minSwaps(int[] nums) {
      
-        int countOfOnes = (int)Arrays.stream(nums).boxed().filter(a -> a == 1).count();
+        int countOfOnes = countOnes(nums);
+            //(int)Arrays.stream(nums).boxed().filter(a -> a == 1).count();
         int i = 0;
         int j = 0;
         int currentCount = 0;
@@ -27,5 +28,15 @@ class Solution {
         
         return ans;
         
+    }
+    
+    int countOnes(int[] nums){
+        int cnt = 0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] == 1)
+                cnt++;
+        }
+        
+        return cnt;
     }
 }
