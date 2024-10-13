@@ -6,14 +6,11 @@ type Counter = {
 
 function createCounter(init: number): Counter {
     let counterVal = init;
-    let def_val = init;
     return {
     increment: () => ++counterVal,
     decrement: () => --counterVal,
-    reset: ()=> {
-        counterVal = def_val;
-        return def_val;
-    }
+    reset: ()=> counterVal = init
+        
     };
     
 };
