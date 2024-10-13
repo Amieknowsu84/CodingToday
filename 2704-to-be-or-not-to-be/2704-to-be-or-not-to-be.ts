@@ -5,22 +5,20 @@ type ToBeOrNotToBe = {
 
 function expect(val: any): ToBeOrNotToBe {
    return {
-     toBe: (otherVal: any): boolean =>  { 
-       if(val === otherVal){
-         return true;
-     }else{
-         throw new Error("Not Equal");
-     }},
-     notToBe: (otherVal: any): boolean => { if(val !== otherVal){
-         return true;
-     }else{
-         throw new Error("Equal");
+     toBe: (otherVal: any): boolean => {
+       if (val === otherVal) return true;
+       throw new Error("Not Equal");
+     },
+     notToBe: (otherVal: any): boolean => {
+       if (val !== otherVal) return true;
+       throw new Error("Equal");
      }
-                                          }
-   }
-};
+   };
+}
 
 /**
- * expect(5).toBe(5); // true
- * expect(5).notToBe(5); // throws "Equal"
+ * Example usage:
+ * 
+ * expect(5).toBe(5);       // true
+ * expect(5).notToBe(5);    // throws "Equal"
  */
