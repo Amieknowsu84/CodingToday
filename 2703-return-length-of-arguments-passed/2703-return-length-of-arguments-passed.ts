@@ -8,7 +8,6 @@ function argumentsLength(...args: JSONValue[]): number {
         if (arg === null || typeof arg === "boolean" || typeof arg === "number" || typeof arg === "string" || Object.values(arg).length == 0) {
             count += 1;
         } else if (Array.isArray(arg)) {
-            // If the argument is an array, recursively count the elements
             count += 1;
         } else if (typeof arg === "object") {
             // If the argument is an object, recursively count the values
